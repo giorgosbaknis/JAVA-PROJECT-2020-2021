@@ -7,9 +7,5 @@ public class Main {
         Service se = new Service("NurserySupport", "nosokoma", 5);
         System.out.println(se.toString());
 
-        //Test Material
-        Material mat = new Material("milk", "gala",2,1,2,3);
-        System.out.println(mat.toString());
-
     }
 }
