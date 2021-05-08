@@ -1,7 +1,5 @@
 package REQUESTS;
-
 import ENTITY.*;
-
 import java.util.Comparator;
 
 public class RequestDonation implements Comparable<RequestDonation> {
@@ -9,6 +7,10 @@ public class RequestDonation implements Comparable<RequestDonation> {
     private double quantity;
     //interface comparator!!!!!!!!
 
+
+    public Entity getEntity() {
+        return entity;
+    }
 
     public RequestDonation(Entity entity, double quantity) {
         this.entity = entity;

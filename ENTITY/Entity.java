@@ -12,6 +12,7 @@ abstract public class Entity {
     public String getEntityInfo(){
         return "Name: " + name + "\nDescription: " + description + "\nId: " + id;
     }
+
     abstract public String getDetails();
 
     @Override
@@ -19,4 +20,7 @@ abstract public class Entity {
         return getEntityInfo() + getDetails();
     }
 
+    public int getId() {
+        return id;
+    }
 }

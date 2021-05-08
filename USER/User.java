@@ -9,5 +9,13 @@ abstract class User {
         this.phone = phone;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
 
 }

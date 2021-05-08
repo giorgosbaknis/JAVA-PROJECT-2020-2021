@@ -16,4 +16,16 @@ public class Material extends Entity{
     public String getDetails(){
         return "\nObject is Material" + "\nLevel1: "+ level1  + "\nLevel2: " + level2 + "\nLevel3: " + level3;
     }
+
+    public double getLevel1() {
+        return level1;
+    }
+
+    public double getLevel2() {
+        return level2;
+    }
+
+    public double getLevel3() {
+        return level3;
+    }
 }
