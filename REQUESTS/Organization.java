@@ -2,10 +2,12 @@ package REQUESTS;
 
 import ENTITY.Entity;
 
-public class Organization {
-    private static Entity entitylist;
+import java.util.ArrayList;
 
-    public static Entity getEntitylist() {
+public class Organization {
+    private static ArrayList<Entity> entitylist = new ArrayList<>();
+
+    public static ArrayList<Entity> getEntitylist() {
         return entitylist;
     }
 }
