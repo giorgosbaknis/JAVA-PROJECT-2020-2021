@@ -16,32 +16,31 @@ public class Requests extends RequestDonationList{
 
         try {
 
-          for (RequestDonation rdEntity : getRdEntities()) {
+          for (RequestDonation currentDonation : Organization.getCurrentDonations().getRdEntities()) {
 
-              if (rdID == rdEntity.getID())
+              if (rdID == currentDonation.getID())
 
-                  if (rdQu <= rdEntity.getQuantity()) {
-
-                      break;
-                  } else
+                  if (rdQu > currentDonation.getQuantity()) {
                       throw new RuntimeException("This quantity is not currently available, we deeply apologize.");
+                  }
 
 
-            for(var Beneficiaries: Organization.getBeneficiaryList()){
+              for (var currBenef : Organization.getBeneficiaryList()) {
 
-                if(Beneficiaries.getRequestsList().get(rdID) != null ){
-                    if(!validRequestDonation(rd , Beneficiaries) )
-                        break;
-                    else
-                        throw new RuntimeException("Beneficiary: "+Beneficiaries.getName() +" is not allowed to have "+rd.getEntity().getEntityInfo());
+                  if (currBenef.getRequestsList().get(rdID) != null) {
+                      if (validRequestDonation(rd, currBenef))
+                          break;
+                      else
+                          throw new RuntimeException("Beneficiary: " + currBenef.getName() + " is not allowed to have " + rd.getEntity().getEntityInfo());
 
 
-                }
+                  }
 
-            }
+              }
+          }
             super.add(rd);
             System.out.println("Request was succesfully made.");
-          }
+
       }catch (RuntimeException e){
           System.err.println(e);
       }
@@ -49,35 +48,36 @@ public class Requests extends RequestDonationList{
     }
 
     @Override
-    public void modify(int id, int quantity) {
+    public void modify(RequestDonation rd) {
+        int id = rd.getID();
+        double quantity = rd.getQuantity();
         try {
-            RequestDonation bot = null;
-            for (RequestDonation rdEntity : getRdEntities()) {
 
-                if (id == rdEntity.getID())
+            for (RequestDonation currentDona : Organization.getCurrentDonations().getRdEntities()) {
 
-                    if (quantity <= rdEntity.getQuantity()) {
-                        bot=rdEntity;
-                        break;
-                    } else
+                if (id == currentDona.getID())
+
+                    if (quantity > currentDona.getQuantity()) {
                         throw new RuntimeException("This quantity is not currently available, we deeply apologize.");
+                    }
 
 
-                for(var Beneficiaries: Organization.getBeneficiaryList()){
+                for (var currBenef : Organization.getBeneficiaryList()) {
 
-                    if(Beneficiaries.getRequestsList().get(id) != null ){
-                        if(validRequestDonation(bot , Beneficiaries) )
+                    if (currBenef.getRequestsList().get(id) != null) {
+                        if (validRequestDonation(rd, currBenef))
                             break;
                         else
-                            throw new RuntimeException("Beneficiary: "+Beneficiaries.getName() +" is not allowed to have "+bot.getEntity().getEntityInfo());
+                            throw new RuntimeException("Beneficiary: " + currBenef.getName() + " is not allowed to have " + rd.getEntity().getEntityInfo());
 
 
                     }
 
                 }
-                super.modify(id, quantity);
-                System.out.println("Request was succesfully made.");
             }
+                super.modify(rd);
+                System.out.println("Request was succesfully made.");
+
         }catch (RuntimeException e){
             System.err.println(e);
         }
@@ -138,6 +138,49 @@ public class Requests extends RequestDonationList{
 
 
     }
+
+    public void commit(){
+        for(RequestDonation requestedDon: getRdEntities()){
+            try {
+                Beneficiary currBen = null;
+                int currID = requestedDon.getID();
+                double currQuantity = requestedDon.getQuantity();
+
+                for (RequestDonation currentDonation : Organization.getCurrentDonations().getRdEntities()) {
+
+                    if (currID == currentDonation.getID())
+
+                        if (currQuantity > currentDonation.getQuantity()) {
+                            throw new RuntimeException("This quantity is not currently available, we deeply apologize.");
+                        }
+
+                    for(var currBenef: Organization.getBeneficiaryList()){
+
+                        if(currBenef.getRequestsList().get(currID) != null ){
+
+                            if(validRequestDonation(requestedDon , currBenef) ) {
+                                currBen = currBenef;
+                                break;
+                            }
+                            else
+                                throw new RuntimeException("Beneficiary: "+currBenef.getName() +" is not allowed to have "+requestedDon.getEntity().getEntityInfo());
+
+
+                        }
+                    }
+                    currentDonation.setQuantity(currentDonation.getQuantity()-currQuantity);
+                    getRdEntities().remove(requestedDon);
+                    currBen.getRecievedList().add(requestedDon);
+
+                }
+
+            }catch (RuntimeException e){
+                System.err.println(e);
+            }
+
+        }
+    }
+
 
 
 

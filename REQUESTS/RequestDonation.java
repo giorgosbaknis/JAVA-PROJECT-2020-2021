@@ -1,6 +1,6 @@
 package REQUESTS;
 import ENTITY.*;
-import java.util.Comparator;
+
 
 public class RequestDonation implements Comparable<RequestDonation> {
     private Entity entity;

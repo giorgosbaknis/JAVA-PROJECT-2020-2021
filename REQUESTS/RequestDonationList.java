@@ -11,14 +11,19 @@ public class RequestDonationList {
 
     public RequestDonation get(int id) {
 
-        for (RequestDonation rdEntity : rdEntities) { //den yparxei exception?
-            if (rdEntity.getID() == id) {
-                return rdEntity;
+        try {
+            for (RequestDonation rdEntity : rdEntities) { //den yparxei exception?
+                if (rdEntity.getID() == id) {
+                    return rdEntity;
+                }
             }
-        }
-                System.err.println("Entity with that ID doesnt exist");
-                return null;
+            throw new RuntimeException("Entity with that ID doesnt exist");
+
+    }catch(RuntimeException e){
+        System.err.println(e);
+        return null;
     }
+}
     public void add(RequestDonation rd) {
         try {
 
@@ -60,14 +65,23 @@ public class RequestDonationList {
         }
     }
 
-    public void modify(int id,int quantity) {
+    public void modify(RequestDonation rd) {
+        int rdID = rd.getID();
+        double rdQuan = rd.getQuantity();
+        boolean found = false;
 
-        for (RequestDonation rdEntity : rdEntities) {
-            if (rdEntity.getID() == id) {
-                rdEntity.setQuantity(quantity);  //arnitikh posothta exception
+        try {
+            for (RequestDonation rdEntity : rdEntities) {
+                if (rdEntity.getID() == rdID) {
+                    rdEntity.setQuantity(rdQuan);
+                    found = true;
+                    break;                            //arnitikh posothta exception
+                }
             }
+            if (!found) throw new RuntimeException("Entity with that ID doesnt exist");
+        }catch (RuntimeException e){
+            System.err.println(e);
         }
-        System.err.println("Entity with that ID doesnt exist");
 
     }
 
