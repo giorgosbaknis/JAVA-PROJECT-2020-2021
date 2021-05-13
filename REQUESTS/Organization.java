@@ -42,15 +42,12 @@ public class Organization {
                 System.out.println("Error");
                 throw new RuntimeException("This entity already exists");
             }
-            
+          
+            entityList.add(entity);}
+
         }catch (RuntimeException e){
             System.err.println(e);
         }
-         if (entityList.contains(entity) == false){
-         entityList.add(entity);}
-
-
-
      }
 
     public   void  removeEntity(Entity entity){
