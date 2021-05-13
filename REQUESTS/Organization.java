@@ -1,24 +1,31 @@
+package REQUESTS;
+
+import ENTITY.Entity;
+import USER.*;
 
 import java.util.ArrayList;
+
 
 public class Organization {
 
     private static ArrayList<Entity> entityList= new ArrayList<>();
-   private static ArrayList<Beneficiary> beneficiaryList = new ArrayList<>();
-   private static ArrayList<Donator> donatorList = new ArrayList<>();
-    private    Admin admin;
-    private RequestDonationList currentDonations;
+    private static ArrayList<Beneficiary> beneficiaryList = new ArrayList<>();
+    private static ArrayList<Donator> donatorList = new ArrayList<>();
+    private Admin admin;
+    private static RequestDonationList currentDonations;
 
 
-
-
-
-    public ArrayList<Entity> getEntitylist() {
-
-        return entityList;
+    public static RequestDonationList getCurrentDonations() {
+        return currentDonations;
     }
 
+    public static ArrayList<Beneficiary> getBeneficiaryList() {
+        return beneficiaryList;
+    }
 
+    public static ArrayList<Entity> getEntityList() {
+        return entityList;
+    }
 
 
     public Admin getAdmin() {
@@ -32,92 +39,85 @@ public class Organization {
     }
 
 
-     public  void addEntity(Entity entity ){
+    public  void addEntity(Entity entity ){
 
         try {
 
 
-            if (entityList.contains(entity) == true) ;
+            if (entityList.contains(entity))
             {
                 System.out.println("Error");
                 throw new RuntimeException("This entity already exists");
-            }
-          
-            entityList.add(entity);
 
-        }catch (RuntimeException e){
+            }
+            entityList.add(entity);
+        }catch (RuntimeException e) {
             System.err.println(e);
         }
-     }
+    }
 
     public   void  removeEntity(Entity entity){
 
-        if(admin==getAdmin());{
+        if(admin==getAdmin()){
             entityList.remove(entity);
         }
 
 
     }
-
+    //H methodos contains se ena arraylist einai boolean
     public void  insertDonator(Donator donator){
-
 
         try {
 
-
-            if (donatorList.contains(donator) == true) ;
+            if (donatorList.contains(donator))
             {
                 System.out.println("Error");
+                throw new RuntimeException("This donator already exists");
 
             }
-            throw new RuntimeException("This donator already exists");
+            donatorList.add(donator);
         }catch (RuntimeException e){
             System.err.println(e);
         }
-        if (donatorList.contains(donator) == false) ;{
-        donatorList.add(donator);}
-
     }
 
 
 
     void removeDonator(Donator donator){
 
-        if(admin==getAdmin());{
-        donatorList.remove(donator);}
+        if(admin==getAdmin()){
+            donatorList.remove(donator);}
     }
 
     public  void  insertBeneficiary(Beneficiary beneficiary){
 
         try {
 
-
-            if (beneficiaryList.contains(beneficiary) == true) ;
+            if (beneficiaryList.contains(beneficiary))
             {
                 System.out.println("Error");
+                throw new RuntimeException("This beneficiary already exists");
 
             }
-            throw new RuntimeException("This beneficiary already exists");
+            beneficiaryList.add(beneficiary);
         }catch (RuntimeException e){
             System.err.println(e);
         }
-        if (beneficiaryList.contains(beneficiary) == false) ;{
-        beneficiaryList.add(beneficiary);}
+
 
     }
 
 
 
     public void removeBeneficiary (Beneficiary beneficiary){
-        if(admin==getAdmin());{
-        beneficiaryList.remove(beneficiary);}
+        if(admin==getAdmin()){
+            beneficiaryList.remove(beneficiary);}
 
     }
 
     void listEntities(){
-      
-        System.out.println(entityList);
 
+        System.out.println(entityList);
 
     }
 
@@ -129,9 +129,9 @@ public class Organization {
     void listDonators(){
         System.out.println(donatorList);
 
-
     }
 
 
 
 }
+
