@@ -43,7 +43,7 @@ public class Organization {
                 throw new RuntimeException("This entity already exists");
             }
           
-            entityList.add(entity);}
+            entityList.add(entity);
 
         }catch (RuntimeException e){
             System.err.println(e);
