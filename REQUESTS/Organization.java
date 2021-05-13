@@ -40,9 +40,9 @@ public class Organization {
             if (entityList.contains(entity) == true) ;
             {
                 System.out.println("Error");
-
+                throw new RuntimeException("This entity already exists");
             }
-            throw new RuntimeException("This entity already exists");
+            
         }catch (RuntimeException e){
             System.err.println(e);
         }
