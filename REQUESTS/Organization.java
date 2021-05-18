@@ -1,6 +1,6 @@
 package REQUESTS;
 
-import ENTITY.Entity;
+import ENTITY.*;
 import USER.*;
 
 import java.util.ArrayList;
@@ -14,6 +14,9 @@ public class Organization {
     private Admin admin;
     private static RequestDonationList currentDonations;
 
+    public static ArrayList<Donator> getDonatorList() {
+        return donatorList;
+    }
 
     public static RequestDonationList getCurrentDonations() {
         return currentDonations;
@@ -83,7 +86,7 @@ public class Organization {
 
 
 
-    void removeDonator(Donator donator){
+    public void removeDonator(Donator donator){
 
         if(admin==getAdmin()){
             donatorList.remove(donator);}
@@ -115,18 +118,49 @@ public class Organization {
 
     }
 
-    void listEntities(){
+   public void listEntities(){
 
-        System.out.println(entityList);
+
+        int cout=0;
+
+
+        for(int i=0;i<entityList.size();i++){
+            if (entityList.get(i) instanceof Service){
+                cout++;
+                if (cout==1){
+                    System.out.println("Service");
+                }
+
+                System.out.println(entityList.get(i));
+            }
+        }
+
+       cout=0;
+       for(int i=0;i<entityList.size();i++){
+           if (entityList.get(i) instanceof Material){
+               cout++;
+               if (cout==1){
+                   System.out.println("Material");
+               }
+               System.out.println(entityList.get(i));
+           }
+
+       }
+
 
     }
 
-    void listBeneficiaries(){
-        System.out.println(beneficiaryList);
-        System.out.println(currentDonations);
+   public void listBeneficiaries() {
+
+       for (Beneficiary currBen : beneficiaryList) {
+
+           System.out.println(currBen.getName());
+             currBen.getRecievedList().monitor();
+       }
+
     }
 
-    void listDonators(){
+   public void listDonators(){
         System.out.println(donatorList);
 
     }
