@@ -7,6 +7,10 @@ public class Donator extends User{
 
     private Offers offerList;
 
+    public Offers getOfferList() {
+        return offerList;
+    }
+
     public Donator(String name, String phone) {
         super(name, phone);
     }
