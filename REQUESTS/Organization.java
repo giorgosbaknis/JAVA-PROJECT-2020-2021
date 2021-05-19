@@ -11,7 +11,7 @@ public class Organization {
     private static ArrayList<Entity> entityList= new ArrayList<>();
     private static ArrayList<Beneficiary> beneficiaryList = new ArrayList<>();
     private static ArrayList<Donator> donatorList = new ArrayList<>();
-    private Admin admin;
+    private static Admin admin;
     private static RequestDonationList currentDonations;
 
     public static ArrayList<Donator> getDonatorList() {
@@ -59,9 +59,9 @@ public class Organization {
         }
     }
 
-    public   void  removeEntity(Entity entity){
+    public   void  removeEntity(Entity entity,String phones){
 
-        if(admin==getAdmin()){
+        if(phones.equals(admin.getPhone())){
             entityList.remove(entity);
         }
 
@@ -86,9 +86,9 @@ public class Organization {
 
 
 
-    public void removeDonator(Donator donator){
+    public  static void removeDonator(Donator donator, String phones){
 
-        if(admin==getAdmin()){
+        if(phones.equals(admin.getPhone())){
             donatorList.remove(donator);}
     }
 
@@ -112,8 +112,8 @@ public class Organization {
 
 
 
-    public void removeBeneficiary (Beneficiary beneficiary){
-        if(admin==getAdmin()){
+    public static void removeBeneficiary (Beneficiary beneficiary,String phones){
+        if(phones.equals(admin.getPhone())){
             beneficiaryList.remove(beneficiary);}
 
     }
@@ -150,19 +150,21 @@ public class Organization {
 
     }
 
-   public void listBeneficiaries() {
+   public static void listBeneficiaries() {
 
-       for (Beneficiary currBen : beneficiaryList) {
+       for (int i=0;i<beneficiaryList.size();i++) {
 
-           System.out.println(currBen.getName());
-             currBen.getRecievedList().monitor();
+           System.out.println((i+1) + ". " + beneficiaryList.get(i).getName());
+           beneficiaryList.get(i).getRecievedList().monitor();
        }
 
     }
 
-   public void listDonators(){
-        System.out.println(donatorList);
+   public static void listDonators(){
 
+       for (int i=0;i<donatorList.size();i++) {
+           System.out.println((i+1) + ". " + donatorList.get(i).getName());
+       }
     }
 
 
