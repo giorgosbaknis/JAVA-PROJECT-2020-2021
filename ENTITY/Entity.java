@@ -9,6 +9,11 @@ abstract public class Entity {
         this.description = description;
         this.id = id;
     }
+
+    public String getName() {
+        return name;
+    }
+
     public String getEntityInfo(){
         return "Name: " + name + "\nDescription: " + description + "\nId: " + id;
     }

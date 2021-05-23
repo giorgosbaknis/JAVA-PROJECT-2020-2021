@@ -1,11 +1,13 @@
 package USER;
 
+import ENTITY.Service;
 import REQUESTS.Offers;
 import REQUESTS.RequestDonation;
 
 public class Donator extends User{
 
-    private Offers offerList;
+    private Offers offerList = new Offers();
+
 
     public Offers getOfferList() {
         return offerList;
@@ -13,6 +15,7 @@ public class Donator extends User{
 
     public Donator(String name, String phone) {
         super(name, phone);
+
     }
     public void add(RequestDonation rd){
         offerList.add(rd);

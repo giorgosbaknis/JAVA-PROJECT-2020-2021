@@ -1,6 +1,7 @@
 package REQUESTS;
 
 import ENTITY.Material;
+import ENTITY.Service;
 import USER.Beneficiary;
 
 public class Requests extends RequestDonationList{
@@ -27,15 +28,12 @@ public class Requests extends RequestDonationList{
 
               for (var currBenef : Organization.getBeneficiaryList()) {
 
-                  if (currBenef.getRequestsList().get(rdID) != null) {
-                      if (validRequestDonation(rd, currBenef))
+                  if (currBenef.getRequestsList().get(rdID)!= null) {
+                      if (validRequestDonation(rd, currBenef) )
                           break;
                       else
                           throw new RuntimeException("Beneficiary: " + currBenef.getName() + " is not allowed to have " + rd.getEntity().getEntityInfo());
-
-
                   }
-
               }
           }
             super.add(rd);

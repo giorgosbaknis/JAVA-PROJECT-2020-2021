@@ -1,5 +1,6 @@
 package ENTITY;
 
+import MENU.Menu;
 import REQUESTS.Organization;
 import USER.*;
 import REQUESTS.*;
@@ -30,12 +31,29 @@ public class Main {
         Admin admin = new Admin("Baknis","555435123");
         Beneficiary beneficiary1 =new Beneficiary("Kostas","6975554123",2);
         Beneficiary beneficiary2 =new Beneficiary("Maria","6985554169",3);
+        Donator donator = new Donator("Babis", "697666666");
+{
 
-        Donator donator = new Donator("Babis","697666666");
 
-        beneficiary1.addRequest(new RequestDonation(milk,1));
-        beneficiary1.addRequest(new RequestDonation(BabySitting,1));
+    //Organization.getCurrentDonations().add(new RequestDonation(milk, 100));
 
-        donator.add();
+
+
+    org.insertBeneficiary(beneficiary1);
+    org.insertBeneficiary(beneficiary2);
+    org.insertDonator(donator);
+
+   donator.add(new RequestDonation(milk, 100));
+    org.addEntity(milk);
+    org.addEntity(BabySitting);
+    org.addEntity(rice);
+    Menu menu = new Menu();
+
+
+
+}
+
+
+
     }
 }

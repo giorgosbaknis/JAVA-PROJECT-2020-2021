@@ -2,7 +2,7 @@ package REQUESTS;
 import ENTITY.*;
 
 
-public class RequestDonation implements Comparable<RequestDonation> {
+public class RequestDonation implements Comparable<RequestDonation> { //Comparable anti gia Comparator
     private Entity entity;
     private double quantity;
     //interface comparator!!!!!!!!

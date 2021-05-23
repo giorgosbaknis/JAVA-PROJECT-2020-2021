@@ -31,7 +31,7 @@ public class Organization {
     }
 
 
-    public Admin getAdmin() {
+    public static Admin getAdmin() {
         return admin;
     }
 
@@ -59,7 +59,7 @@ public class Organization {
         }
     }
 
-    public   void  removeEntity(Entity entity,String phones){
+    public  void  removeEntity(Entity entity,String phones){
 
         if(phones.equals(admin.getPhone())){
             entityList.remove(entity);
@@ -118,7 +118,7 @@ public class Organization {
 
     }
 
-   public void listEntities(){
+   public static void listEntities(){
 
 
         int cout=0;
@@ -131,7 +131,7 @@ public class Organization {
                     System.out.println("Service");
                 }
 
-                System.out.println(entityList.get(i));
+                System.out.println( cout+". "+entityList.get(i).getName() );
             }
         }
 
@@ -142,7 +142,7 @@ public class Organization {
                if (cout==1){
                    System.out.println("Material");
                }
-               System.out.println(entityList.get(i));
+               System.out.println( cout+". "+entityList.get(i).getName() );
            }
 
        }

@@ -1,5 +1,7 @@
 package REQUESTS;
 
+import ENTITY.Service;
+
 import java.util.ArrayList;
 
 public class RequestDonationList {
@@ -8,6 +10,7 @@ public class RequestDonationList {
     public ArrayList<RequestDonation> getRdEntities() {
         return rdEntities;
     }
+
 
     public RequestDonation get(int id) {
 
@@ -19,11 +22,11 @@ public class RequestDonationList {
             }
             throw new RuntimeException("Entity with that ID doesnt exist");
 
-    }catch(RuntimeException e){
-        System.err.println(e);
-        return null;
+        }catch(RuntimeException e){
+            System.err.println(e);
+            return null;
+        }
     }
-}
     public void add(RequestDonation rd) {
         try {
 
@@ -39,16 +42,16 @@ public class RequestDonationList {
             //Xreiazomai entityList apo to Organization kai class gia xeirismo "den yparxei" exception
             if (found == 0) {
                 for (int i = 0; i < rdEntities.size(); i++) {
-                    for (int j = 0; j < Organization.getEntitylist().size(); j++) {
-                        if (rdEntities.get(i).getID() == Organization.getEntitylist().get(j).getId()) {
+                    for (int j = 0; j < Organization.getEntityList().size(); j++) {
+                        if (rdEntities.get(i).getID() == Organization.getEntityList().get(j).getId()) {
                             break;
                         } else if(i==rdEntities.size()-1) throw new RuntimeException("Entity doesnt exist in the Organization"); //ekfwnhsh???
                     }
                 }
+                rdEntities.add(rd);
             }
 
-            if (found == 0)
-                rdEntities.add(rd);
+
         }catch (RuntimeException e){
             System.err.println(e);
         }
@@ -78,7 +81,7 @@ public class RequestDonationList {
                     break;                            //arnitikh posothta exception
                 }
             }
-            if (!found) throw new RuntimeException("Entity with that ID doesnt exist");
+            if (!found) throw new RuntimeException("Entity with that same ID doesnt exist");
         }catch (RuntimeException e){
             System.err.println(e);
         }
@@ -86,7 +89,8 @@ public class RequestDonationList {
     }
 
     public void monitor(){
-        System.out.println(rdEntities);
+        for ( int i=0;i<rdEntities.size();i++)
+        System.out.println((i+1)+". "+ rdEntities.get(i).getEntity().getName() + "("+ rdEntities.get(i).getQuantity()+")");
     }
 
     public void reset(){
