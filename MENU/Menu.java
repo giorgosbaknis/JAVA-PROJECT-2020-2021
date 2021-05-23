@@ -17,25 +17,28 @@ public class Menu {
 
             String currPhone = "";
 
-            System.out.println("Give your phone number: ");
+            System.out.println("Give your phone number: "); //mas leipei h eggrafh
             try (Scanner sc = new Scanner(System.in)) {
+                boolean found = false;
 
-
-                    currUserPhone = currPhone = sc.nextLine().strip();
+                currUserPhone = currPhone = sc.nextLine().strip();
 
 
                 for (Beneficiary currBen : Organization.getBeneficiaryList()) {
                     if (currPhone.equals(currBen.getPhone())) {
+                        found=true;
                         printMenuBene(currBen);
+
                     }
                 }
 
                 for (Donator currDon : Organization.getDonatorList()) {
                     if (currPhone.equals(currDon.getPhone())) {
+                        found=true;
                         printMenuDon(currDon);
                     }
                 }
-                if (currPhone.equals(Organization.getAdmin().getPhone())){
+                if (currPhone.equals(Organization.getAdmin().getPhone())) {
                     printMenuAdmin(Organization.getAdmin());
                 }
 
@@ -56,8 +59,8 @@ public class Menu {
         System.out.println("4.Back");
         System.out.println("5.Logout");
         System.out.println("6.Exit");
-       outerb:
-      while (true){
+        outerb:
+        while (true){
             int epil;
             try(Scanner sc = new Scanner(System.in))
             {
@@ -66,23 +69,26 @@ public class Menu {
                         epil = sc.nextInt();
                         sc.nextLine();
                         break;
-                    }sc.nextLine();
+                    }else
+                        sc.nextLine();
                 }
-               switch1:
+
                 switch(epil){
                     case 1:
                         int chois;
-                     Organization.listEntities();
-                     System.out.println("Which entity do you want?");
+                        Organization.listEntities();
+                        System.out.println("Which entity do you want?");
                         if (sc.hasNextInt()) {
                             chois = sc.nextInt();
                             sc.nextLine();
 
-                            if (Organization.getCurrentDonations().get(Organization.getCurrentDonations().getRdEntities().get(0).getID()) != null) {
+                            if (Organization.getCurrentDonations().getRdEntities().size() != 0) {
                                 try {
 
+                                    boolean foundDon = false;
                                     for (RequestDonation currItem : Organization.getCurrentDonations().getRdEntities()) {
                                         if (currItem.getID() == Organization.getEntityList().get(chois - 1).getId()) {
+                                            foundDon = true;
                                             double quantity;
                                             System.out.println("How much of :" + currItem.getEntity().getName() + " do you want?");
                                             if (sc.hasNextDouble()) {
@@ -100,21 +106,26 @@ public class Menu {
                                                 } else
                                                     System.out.println("Quantity of " + currItem.getEntity().getName() + " is not available to Organization, please choose less or other item");
 
-                                                break switch1;
+                                                break ;
                                             }
-                                            sc.nextLine();
+                                            else
+                                                sc.nextLine();
                                         }
                                     }
-                                    System.out.println("Quantity of that items is not available to Organization, please choose other item");
+                                    if(!foundDon)
+                                    System.out.println("Quantity of that item is not available to Organization, please choose other item.");
+
+                                    break;
 
 
                                 } catch (ArrayIndexOutOfBoundsException e) {
                                     System.err.println(e);
                                 }
                             }
-                        } else
+                        } else {
                             System.out.println("Currently there are not any Donations in the system.");
-                        sc.nextLine();
+                            sc.nextLine();
+                        }
                         break;
 
 
@@ -122,7 +133,7 @@ public class Menu {
 
                     case 2:
                         if (be.getRequestsList()!=null)
-                        be.showRequests();
+                            be.showRequests();
                         else
                             System.out.println("There are not any requests at this time.");
                         break;
@@ -147,42 +158,45 @@ public class Menu {
         }
 
     }
-    public void printMenuDon(Donator don){
-        System.out.println("Hello "+don.getName() +'\n'+"Your phone is :"+don.getPhone()); //ONOMA ORGANAT?????
-        System.out.println("1.Add Offer");
-        System.out.println("2.Show Offers");
-        System.out.println("3.Commit");
-        System.out.println("4.Back");
-        System.out.println("5.Logout");
-        System.out.println("6.Exit");
-       outerd:
-       while (true){
-            int epil;
-            try(Scanner sc = new Scanner(System.in))
-            {
+    public void printMenuDon(Donator don) {
+        System.out.println("Hello " + don.getName() + '\n' + "Your phone is :" + don.getPhone()); //ONOMA ORGANAT?????
+        try (Scanner sc = new Scanner(System.in)) {
+            outerd:
+            while (true) {
+
+                int epil;
+
                 while (true) {
+                    System.out.println("1.Add Offer");
+                    System.out.println("2.Show Offers");
+                    System.out.println("3.Commit");
+                    System.out.println("4.Back");
+                    System.out.println("5.Logout");
+                    System.out.println("6.Exit");
+
                     if (sc.hasNextInt()) {
                         epil = sc.nextInt();
                         sc.nextLine();
                         break;
-                    }
-                    sc.nextLine();
+                    } else
+                        sc.nextLine();
                 }
-                switch(epil){
+
+                switch (epil) {
                     case 1:
-                        int counter=0;
-                        System.out.print("1.Material" );
-                        for(int i=0;i<Organization.getEntityList().size();i++){
+                        int counter = 0;
+                        System.out.print("1.Material");
+                        for (int i = 0; i < Organization.getEntityList().size(); i++) {
                             if (Organization.getEntityList().get(i) instanceof Material)
                                 counter++;
                         }
-                        System.out.println("("+counter+")");
-                        System.out.println("2.Serivce "+ '(' + (Organization.getEntityList().size()-counter) +')' );
+                        System.out.println("(" + counter + ")");
+                        System.out.println("2.Serivce " + '(' + (Organization.getEntityList().size() - counter) + ')');
                         int epild1;
                         innerd1:
                         while (true) {
                             System.out.println("Which Category do you want?");
-                            System.out.println("Press 3 to go back");
+                            System.out.println("Press 4 to go back");
                             if (sc.hasNextInt()) {
                                 epild1 = sc.nextInt();
                                 sc.nextLine();
@@ -195,16 +209,16 @@ public class Menu {
 
                                             if (Organization.getEntityList().get(i) instanceof Material) {
                                                 materials.add(Organization.getEntityList().get(i));
-                                                System.out.print( materials.size() + "." + Organization.getEntityList().get(i).getName());
+                                                System.out.print(materials.size() + "." + Organization.getEntityList().get(i).getName());
 
 
-                                                if (Organization.getCurrentDonations() != null) // dn eixame kanei elegxo an einai null
-                                                for (RequestDonation currDon : Organization.getCurrentDonations().getRdEntities()) {
+                                                if (Organization.getCurrentDonations().getRdEntities().size() != 0) // dn eixame kanei elegxo an einai null
+                                                    for (RequestDonation currDon : Organization.getCurrentDonations().getRdEntities()) {
 
-                                                    if (currDon.getID() == Organization.getEntityList().get(i).getId()) {
-                                                        System.out.println(" (" + currDon.getQuantity() + ')');
+                                                        if (currDon.getID() == Organization.getEntityList().get(i).getId()) {
+                                                            System.out.println(" (" + currDon.getQuantity() + ')');
+                                                        }
                                                     }
-                                                }
                                                 else
                                                     System.out.println();
 
@@ -212,303 +226,329 @@ public class Menu {
                                             }
                                         }
 
-                                       while2:
-                                       while (true) {
-                                           int antikd1;
-                                           System.out.println("Type the number of your desired Material.");
-                                           if (sc.hasNextInt()) {
-                                               antikd1 = sc.nextInt();
-                                               sc.nextLine();
-                                               try {
-                                                   while2_1:
-                                                   while (true) {
-                                                   System.out.println(materials.get(antikd1 - 1).toString());
-                                                   System.out.println("Do you want to offer this item? Press y or n for yes or no.");
-                                                   System.out.println("Press 3 to go back");
+                                        while2:
+                                        while (true) {
+                                            int antikd1;
+                                            System.out.println("Type the number of your desired Material.");
+                                            if (sc.hasNextInt()) {
+                                                antikd1 = sc.nextInt();
+                                                sc.nextLine();
+                                                try {
+                                                    while2_1:
+                                                    while (true) {
+                                                        System.out.println(materials.get(antikd1 - 1).toString());
+                                                        System.out.println("Do you want to offer this item? Press y or n for yes or no.");
+                                                        System.out.println("Press 4 to go back");
 
 
-                                                           String ok;
-                                                           ok = sc.nextLine().strip().toLowerCase();
+                                                        String ok;
+                                                        ok = sc.nextLine().strip().toLowerCase();
 
-                                                           if (ok.length() == 1) {
-                                                               switch2:
-                                                               switch (ok.charAt(0)) {
-                                                                   case 'y':
-                                                                           System.out.println("What amount do you want to offer?");
-                                                                           double amount;
-                                                                           if (sc.hasNextDouble()) {
-                                                                               amount = sc.nextDouble();
-                                                                               sc.nextLine();
+                                                        if (ok.length() == 1) {
 
-                                                                               if (Organization.getCurrentDonations() != null)
-                                                                                   for (RequestDonation DonSearch : Organization.getCurrentDonations().getRdEntities()) { //tsekarei an yparxei hdh donation apo ayto to object
-                                                                                       if (materials.get(antikd1 - 1).getId() == DonSearch.getID()) {
+                                                            switch (ok.charAt(0)) {
+                                                                case 'y':
+                                                                    System.out.println("What amount do you want to offer?");
+                                                                    double amount;
+                                                                    if (sc.hasNextDouble()) {
+                                                                        amount = sc.nextDouble();
+                                                                        sc.nextLine();
 
-                                                                                           RequestDonation temp1 = DonSearch;
-                                                                                           temp1.setQuantity(amount);
+                                                                        if (Organization.getCurrentDonations().getRdEntities().size() != 0)
+                                                                            for (RequestDonation DonSearch : Organization.getCurrentDonations().getRdEntities()) { //tsekarei an yparxei hdh donation apo ayto to object
+                                                                                if (materials.get(antikd1 - 1).getId() == DonSearch.getID()) {
 
-                                                                                           don.add(temp1);
-                                                                                           break switch2;
-                                                                                       }
+                                                                                    RequestDonation temp1 = DonSearch;
+                                                                                    temp1.setQuantity(amount);
 
-                                                                                   }
-                                                                               RequestDonation temp2 = new RequestDonation(materials.get(antikd1 - 1), amount);
+                                                                                    don.add(temp1);
+                                                                                    System.out.println("Donation was succesful");
 
-                                                                               temp2.setQuantity(amount);
-                                                                               try {
+                                                                                    break while2;
+                                                                                }
 
+                                                                            }
 
-                                                                                   don.add(temp2);
-                                                                                   System.out.println("Donation was succesful");
-                                                                                   break while2;
-                                                                               } catch (NullPointerException e) {
-                                                                                   System.err.println(e);
-                                                                               }
+                                                                        RequestDonation temp2 = new RequestDonation(materials.get(antikd1 - 1), amount);
 
-                                                                           }
-                                                                           else
-                                                                           sc.nextLine();
-
-                                                                           break ;
+                                                                        temp2.setQuantity(amount);
+                                                                        try {
 
 
-                                                                   case 'n':
-                                                                       System.out.println(" You chose to not donate.");
-                                                                       break while2;
+                                                                            don.add(temp2);
+                                                                            System.out.println("Donation was succesful");
+                                                                            break while2;
+                                                                        } catch (NullPointerException e) {
+                                                                            System.err.println(e);
+                                                                        }
 
-                                                                   case '3':
-                                                                       break while2_1;
-                                                                   default:
-                                                                       break ;
-                                                               }
-                                                           }
 
-                                                       break;
-                                                   }
-                                               } catch (ArrayIndexOutOfBoundsException e) {
-                                                   System.err.println(e+ "Material with that Number does not exist.");
-                                               }
-                                           }sc.nextLine();
-                                       }
-                                       break ;
+                                                                    } else
+                                                                        sc.nextLine();
+
+                                                                    break;
+
+
+                                                                case 'n':
+                                                                    System.out.println(" You chose to not donate.");
+                                                                    break while2;
+
+                                                                case '4':
+                                                                    break while2;
+                                                                default:
+                                                                    break;
+                                                            }
+                                                        }
+
+                                                        break;
+                                                    }
+                                                } catch (ArrayIndexOutOfBoundsException e) {
+                                                    System.err.println(e + "Material with that Number does not exist.");
+                                                }
+                                            } else
+                                                sc.nextLine();
+                                        }
+                                        break;
 
                                     case 2:
                                         ArrayList<Entity> services = new ArrayList<>();
-                                        for(int i=0;i<Organization.getEntityList().size();i++){
+                                        for (int i = 0; i < Organization.getEntityList().size(); i++) {
 
-                                            if (Organization.getEntityList().get(i) instanceof Service){
+                                            if (Organization.getEntityList().get(i) instanceof Service) {
                                                 services.add(Organization.getEntityList().get(i));
-                                                System.out.print((i+1)+ '.'+Organization.getEntityList().get(i).getName());
+                                                // System.out.println();
+                                                System.out.print(services.size() + "." + Organization.getEntityList().get(i).getName());
 
-                                                if (Organization.getCurrentDonations() != null)
-                                                for(RequestDonation currDon: Organization.getCurrentDonations().getRdEntities()){
+                                                if (Organization.getCurrentDonations().getRdEntities().size() != 0)
+                                                    for (RequestDonation currDon : Organization.getCurrentDonations().getRdEntities()) {
 
-                                                    if (currDon.getID()==Organization.getEntityList().get(i).getId()){
-                                                        System.out.println(" ("+currDon.getQuantity()+')');
+                                                        if (currDon.getID() == Organization.getEntityList().get(i).getId()) {
+                                                            System.out.println(" (" + currDon.getQuantity() + ')');
+                                                        }
                                                     }
-                                                }
+                                                else System.out.println();
 
                                             }
                                         }
-                                      while3:
-                                      while (true) {
-                                          int antik;
-                                         while4:
-                                         while (true) {
-                                             System.out.println("Type the number of your desired Service");
-                                              if (sc.hasNextInt()) {
-                                                  antik = sc.nextInt();
-                                                  sc.nextLine();
-                                                  try {
-                                                      System.out.println(services.get(antik - 1).toString());
-                                                      System.out.println("Do you want to offer this service? Press y or n for yes or no.");
-                                                      System.out.println("Press 3 to go back");
-                                                     {
-                                                          String ok;
-                                                          ok = sc.nextLine().strip().toLowerCase();
-                                                          if (ok.length() == 1) {
-                                                              switch3:
-                                                              switch (ok.charAt(0)) {
-                                                                  case 'y':
-                                                                      System.out.println("How many hours do you want to offer?");
-                                                                      double hours;
-                                                                      if (sc.hasNextDouble()) {
-                                                                          hours = sc.nextDouble();
-                                                                          sc.nextLine();
-                                                                          if (Organization.getCurrentDonations()!= null)
-                                                                          for (RequestDonation DonSearch : Organization.getCurrentDonations().getRdEntities()) { //tsekarei an yparxei hdh donation apo ayto to object
-                                                                              if (services.get(antik - 1).getId() == DonSearch.getID()) {
+                                        while3:
+                                        while (true) {
+                                            int antik;
+                                            while4:
+                                            while (true) {
+                                                System.out.println("Type the number of your desired Service");
+                                                if (sc.hasNextInt()) {
+                                                    antik = sc.nextInt();
+                                                    sc.nextLine();
+                                                    try {
+                                                        System.out.println(services.get(antik - 1).toString());
+                                                        System.out.println("Do you want to offer this service? Press y or n for yes or no.");
+                                                        System.out.println("Press 4 to go back");
+                                                        {
+                                                            String ok;
+                                                            ok = sc.nextLine().strip().toLowerCase();
+                                                            if (ok.length() == 1) {
 
-                                                                                  RequestDonation temp3 = DonSearch;
-                                                                                  temp3.setQuantity(hours);
+                                                                switch (ok.charAt(0)) {
+                                                                    case 'y':
+                                                                        System.out.println("How many hours do you want to offer?");
+                                                                        double hours;
+                                                                        if (sc.hasNextDouble()) {
+                                                                            hours = sc.nextDouble();
+                                                                            sc.nextLine();
+                                                                            if (Organization.getCurrentDonations().getRdEntities().size() != 0)
+                                                                                for (RequestDonation DonSearch : Organization.getCurrentDonations().getRdEntities()) { //tsekarei an yparxei hdh donation apo ayto to object
+                                                                                    if (services.get(antik - 1).getId() == DonSearch.getID()) {
 
-                                                                                  don.add(temp3);
-                                                                                  break while3;
-                                                                              }
+                                                                                        RequestDonation temp3 = DonSearch;
+                                                                                        temp3.setQuantity(hours);
 
-                                                                          }
-                                                                          RequestDonation temp4 = new RequestDonation(services.get(antik - 1), hours);
+                                                                                        don.add(temp3);
+                                                                                        break while3;
+                                                                                    }
 
-                                                                          temp4.setQuantity(hours);
+                                                                                }
+                                                                            RequestDonation temp4 = new RequestDonation(services.get(antik - 1), hours);
 
-                                                                          don.add(temp4);
-                                                                          System.out.println("Donation was succesful");
-                                                                          break while3;
+                                                                            temp4.setQuantity(hours);
 
-                                                                      }sc.nextLine();
-                                                                      break;
+                                                                            don.add(temp4);
+                                                                            System.out.println("Donation was succesful");
+                                                                            break while3;
 
-                                                                  case 'n':
-                                                                      System.out.println(" You chose to not donate.");
-                                                                      break while3;
+                                                                        } else
+                                                                            sc.nextLine();
+                                                                        break;
 
-                                                                  case '3':
-                                                                      break while4;
-                                                                  default:
-                                                                      break ;
-                                                              }
-                                                          }
-                                                      }
+                                                                    case 'n':
+                                                                        System.out.println(" You chose to not donate.");
+                                                                        break while3;
 
-                                                      break ;
+                                                                    case '4':
+                                                                        break while3;
+                                                                    default:
+                                                                        break;
+                                                                }
+                                                            }
+                                                        }
 
-                                                  } catch (ArrayIndexOutOfBoundsException e) {
-                                                      System.err.println(e);
-                                                  }
-                                              }sc.nextLine();
-                                          }
-                                      }
-                                      break ;
+                                                        break;
 
-                                    case 3:
+                                                    } catch (ArrayIndexOutOfBoundsException e) {
+                                                        System.err.println(e);
+                                                    }
+                                                } else
+                                                    sc.nextLine();
+                                            }
+                                        }
+                                        break;
+
+                                    case 4:
                                         break innerd1;
 
                                     default:
                                         System.out.println("Number doesnt match any category");
                                         break;
                                 }
-                            }sc.nextLine();
+                            } else
+                                sc.nextLine();
                         }
-
+                        break;
 
 
                     case 2:
-                        if( don.getOfferList().get(don.getOfferList().getRdEntities().get(0).getID()) != null ) {
+                        if (don.getOfferList().getRdEntities().size() != 0) {
                             outerw:
-                            while (true){
+                            while (true) {
                                 don.getOfferList().monitor();
-                                System.out.println("Choose an Entity.");
-                                    if (sc.hasNextInt()) {
-                                        int choice;
-                                        choice = sc.nextInt();
-                                        sc.nextLine();
 
-                                        {
-                                            char epil2;
-                                            String st;
-                                            st = sc.nextLine().strip();
-
-                                            if (st.length() == 1) {
-                                                epil2 = st.charAt(0);
-                                               switchouter:
-                                                switch (epil2) {
-
-                                                    case 'a':
-                                                        innerw:
-                                                        while (true) {
-
-                                                            System.out.println("What do you want to do?");
-                                                            System.out.println("1.Delete Offer");
-                                                            System.out.println("2.Change an offer's quantity.");
-                                                            System.out.println("Press 3 to go back");
-
-                                                            if (sc.hasNextInt()) {
-                                                                int chos;
-                                                                chos = sc.nextInt();
-                                                                sc.nextLine();
-
-                                                                switch (chos) {
-                                                                    case 1:
-                                                                        try {
-                                                                            don.getOfferList().remove(don.getOfferList().getRdEntities().get(choice - 1));
-                                                                            System.out.println("Offer was successfully removed");
-                                                                            break;
-                                                                        } catch (ArrayIndexOutOfBoundsException e) {
-                                                                            System.out.println("You entity choice is not valid.");
-                                                                            System.err.println(e);
-                                                                            break innerw;
-                                                                        }
-
-                                                                    case 2:
-
-                                                                        System.out.println("Give quantity");
-                                                                        if (sc.hasNextInt()) {
-
-                                                                            double quantity;
-                                                                            quantity = sc.nextInt();
-                                                                            sc.nextLine();
-                                                                            try {
+                                System.out.println("a.Modify you Offer list");
+                                System.out.println("b.Reset Your Offer List");
+                                System.out.println("c.Commit");
+                                System.out.println("Press 4 to go back.");
+                                char epil2;
+                                String st;
+                                st = sc.nextLine().strip();
 
 
-                                                                                don.getOfferList().getRdEntities().get(choice - 1).setQuantity(quantity);
-                                                                                System.out.println("Quantity was changed to given one.");
-                                                                                break;
-                                                                            } catch (ArrayIndexOutOfBoundsException e) {
-                                                                                System.err.println(e + "\n" + "Choice of entity is not available");
-                                                                                break;
-                                                                            }
-                                                                        }sc.nextLine();
+                                if (st.length() == 1) {
+                                    epil2 = st.charAt(0);
+
+                                    switch (epil2) {
+
+                                        case 'a':
+                                               innerw:
+                                            while (true) {
+                                                System.out.println("Choose an Entity.");
+                                                if (sc.hasNextInt()) {
+                                                    int choice;
+                                                    choice = sc.nextInt();
+                                                    sc.nextLine();
 
 
-                                                                        break;
+                                                    System.out.println("What do you want to do?");
+                                                    System.out.println("1.Delete Offer");
+                                                    System.out.println("2.Change an offer's quantity.");
+                                                    System.out.println("Press 4 to go back");
 
-                                                                    case 3:
-                                                                        break switchouter;
+                                                    if (sc.hasNextInt()) {
+                                                        int chos;
+                                                        chos = sc.nextInt();
+                                                        sc.nextLine();
 
-                                                                    default:
-                                                                        System.out.println("You option choice is not valid");
-                                                                        break;
+                                                        switch (chos) {
+                                                            case 1:
+                                                                try {
+
+
+                                                                    don.getOfferList().remove(don.getOfferList().getRdEntities().get(choice - 1));
+                                                                    System.out.println("Offer was successfully removed");
+                                                                    break;
+
+
+
+                                                                } catch (IndexOutOfBoundsException e) {
+                                                                    System.err.println(e + "You entity choice is not valid." );
+                                                                    break;
                                                                 }
 
+                                                            case 2:
 
-                                                            }sc.nextLine();
-                                                            break ;
+                                                                System.out.println("Give quantity");
+                                                                if (sc.hasNextInt()) {
+
+                                                                    double quantity;
+                                                                    quantity = sc.nextInt();
+                                                                    sc.nextLine();
+                                                                    try {
+
+
+                                                                        don.getOfferList().getRdEntities().get(choice - 1).setQuantity(quantity);
+                                                                        System.out.println("Quantity was changed to given one.");
+                                                                        break;
+                                                                    } catch (IndexOutOfBoundsException e) {
+                                                                        System.err.println(e + "\n" + "Choice of entity is not available");
+                                                                        break;
+                                                                    }
+                                                                } else
+                                                                    sc.nextLine();
+
+
+                                                                break;
+
+                                                            case 4:
+                                                                break innerw;
+
+                                                            default:
+                                                                System.out.println("You option choice is not valid");
+                                                                break;
                                                         }
-                                                    case 'b':
-                                                        System.out.println("Deleting all offers...");
-                                                        don.getOfferList().reset();
-                                                        System.out.println("Success.");
-                                                        break;
+
+                                                    } else
+                                                        sc.nextLine();
 
 
-                                                    case 'c':
-                                                        don.commit();
-                                                        break;
-
-
-                                                    case '3':
-                                                        break switchouter;
-                                                    default:
-                                                        break;
-
-
-
-
-                                                }
+                                                } else sc.nextLine();
+                                                break;
                                             }
+                                            break;
+                                        case 'b':
+                                            System.out.println("Deleting all offers...");
+                                            don.getOfferList().reset();
+                                            System.out.println("Success.");
+                                            break;
 
-                                         }
-                                    }sc.nextLine();
+
+                                        case 'c':
+
+                                            don.commit();
+                                            System.out.println("Commit successful.");
+                                            System.out.println("YOURS TRULY "+Organization.getCurrentDonations().getRdEntities());
+                                            break;
+
+
+                                        case '4':
+                                            break outerw;
+                                        default:
+                                            break;
+
+
+                                    }
+                                }
+
 
                             }
+                            break;
 
-                        }
-                        else {
+                        } else {
                             System.out.println("You do not have any offers at this moment.");
                         }
                         break;
+
+
                     case 3:
                         don.commit();
+                        System.out.println("Commit succesful");
+                        System.out.println("YOURS TRULY "+Organization.getCurrentDonations().getRdEntities());
                         break;
                     case 4:
                         break;
@@ -525,16 +565,15 @@ public class Menu {
 
             }
         }
-
-
     }
+
     public void printMenuAdmin(Admin ad){
         System.out.println("1.View");
         System.out.println("2.Monitor Organization");
         System.out.println("3.Back");
         System.out.println("4.Logout");
         System.out.println("5.Exit");
-       outer:
+        outer:
         while (true){
             int epil;
             try(Scanner sc = new Scanner(System.in))
@@ -544,7 +583,8 @@ public class Menu {
                         epil = sc.nextInt();
                         sc.nextLine();
                         break;
-                    }sc.nextLine();
+                    }else
+                        sc.nextLine();
                 }
                 switch(epil) {
                     case 1:
@@ -556,9 +596,9 @@ public class Menu {
                         }
                         System.out.println("("+counter+")");
                         System.out.print("2.Serivce "+ '(' + (Organization.getEntityList().size()-counter) +')' );
-                         int epil1;
+                        int epil1;
                         inner1:
-                         while (true) {
+                        while (true) {
                             System.out.println("Which Category do you want?");
                             System.out.println("Press 3 to go back");
                             if(sc.hasNextInt()) {
@@ -594,7 +634,7 @@ public class Menu {
                                                 }catch (ArrayIndexOutOfBoundsException e){
                                                     System.err.println(e);
                                                 }
-                                            }
+                                            }else
                                             sc.nextLine();
                                         }
 
@@ -629,7 +669,8 @@ public class Menu {
                                                 }catch (ArrayIndexOutOfBoundsException e){
                                                     System.err.println(e);
                                                 }
-                                            }sc.nextLine();
+                                            }else
+                                                sc.nextLine();
                                         }
 
                                     case 3:
@@ -639,22 +680,27 @@ public class Menu {
                                         System.out.println("Number doesnt match any category");
                                         break;
                                 }
-                            }sc.nextLine();
+                            }else
+                                sc.nextLine();
 
                         }
 
 
                     case 2:
-                        char epil2;
-                       inner2:
-                       while (true) {
-                             {
+
+                        inner2:
+                        while (true) {
+                            char epil2;
+                            System.out.println("a. List Beneficiaries");
+                            System.out.println("b. List Donators");
+                            System.out.println("c. Reset Beneficiaries Lists");
+
                                 String st;
                                 st = sc.nextLine().strip();
 
                                 if (st.length() == 1) {
                                     epil2 = st.charAt(0);
-                                   switch2:
+
                                     switch (epil2) {
                                         case 'a':
                                             Organization.listBeneficiaries();
@@ -673,13 +719,15 @@ public class Menu {
                                                         System.out.println(e);
                                                     }
 
-                                                }sc.nextLine();
+                                                }else
+                                                    sc.nextLine();
                                             }
                                             System.out.println("1.Clear Recieved List");
                                             System.out.println("2.Delete Beneficiary");
                                             int inp2;
+                                            inner3:
                                             while (true) {
-                                                 System.out.println("Give one of the 2 numbers: ");
+                                                System.out.println("Give one of the 2 numbers: ");
                                                 if (sc.hasNextInt()) {
                                                     inp2 = sc.nextInt();
                                                     sc.nextLine();
@@ -691,18 +739,20 @@ public class Menu {
                                                             Organization.removeBeneficiary(Organization.getBeneficiaryList().get(inp-1),currUserPhone);
                                                             break;
                                                         case 3:
-                                                            break switch2;
+                                                            break inner3;
 
                                                         default:
                                                             break;
                                                     }
-                                                }sc.nextLine();
+                                                }else
+                                                    sc.nextLine();
                                             }
+                                            break;
 
                                         case 'b':
                                             Organization.listDonators();
                                             int inpd;
-                                           inner3:
+                                            inner3:
                                             while (true) {
 
                                                 System.out.println("Type the number of the Donator you want.");
@@ -715,7 +765,7 @@ public class Menu {
                                                         while (true) {
                                                             System.out.println("Do you want to delete the donator? Type yes to proceed.");
                                                             String checked;
-                                                          {
+                                                            {
                                                                 checked = sc.nextLine().toLowerCase();
 
                                                                 if (checked.equals("yes")) {
@@ -734,7 +784,8 @@ public class Menu {
                                                         System.out.println(e);
                                                     }
 
-                                                }sc.nextLine();
+                                                }else
+                                                    sc.nextLine();
                                             }
 
 
@@ -742,7 +793,7 @@ public class Menu {
 
                                         case 'c':
                                             for (Beneficiary currBen : Organization.getBeneficiaryList()){
-                                               currBen.getRecievedList().reset();
+                                                currBen.getRecievedList().reset();
                                             }
                                             break;
 
@@ -752,7 +803,7 @@ public class Menu {
                                 }
 
 
-                            }
+
                         }
 
 

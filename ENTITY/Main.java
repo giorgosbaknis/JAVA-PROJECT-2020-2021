@@ -29,10 +29,11 @@ public class Main {
         Service MedicalSupport = new Service("MedicalSupport", "MedicalSupport", 6);
 
         Admin admin = new Admin("Baknis","555435123");
+        org.setAdmin(admin);
         Beneficiary beneficiary1 =new Beneficiary("Kostas","6975554123",2);
         Beneficiary beneficiary2 =new Beneficiary("Maria","6985554169",3);
         Donator donator = new Donator("Babis", "697666666");
-{
+
 
 
     //Organization.getCurrentDonations().add(new RequestDonation(milk, 100));
@@ -48,10 +49,11 @@ public class Main {
     org.addEntity(BabySitting);
     org.addEntity(rice);
     Menu menu = new Menu();
+    menu.check();
 
 
 
-}
+
 
 
 

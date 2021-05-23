@@ -3,8 +3,8 @@ import REQUESTS.*;
 
 public class Beneficiary extends User{
     private int noPersorns = 1;
-    private RequestDonationList recievedList;
-    private Requests requestsList;
+    private RequestDonationList recievedList = new RequestDonationList();
+    private Requests requestsList = new Requests();
 
 
     public RequestDonationList getRecievedList() {

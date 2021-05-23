@@ -11,8 +11,8 @@ public class Organization {
     private static ArrayList<Entity> entityList= new ArrayList<>();
     private static ArrayList<Beneficiary> beneficiaryList = new ArrayList<>();
     private static ArrayList<Donator> donatorList = new ArrayList<>();
-    private static Admin admin;
-    private static RequestDonationList currentDonations;
+    private static Admin admin ;
+    private static RequestDonationList currentDonations = new RequestDonationList();
 
     public static ArrayList<Donator> getDonatorList() {
         return donatorList;
@@ -34,7 +34,6 @@ public class Organization {
     public static Admin getAdmin() {
         return admin;
     }
-
 
 
     public void setAdmin(Admin admin) {
