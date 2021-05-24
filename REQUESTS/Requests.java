@@ -2,7 +2,10 @@ package REQUESTS;
 
 import ENTITY.Material;
 import ENTITY.Service;
+import MENU.Menu;
 import USER.Beneficiary;
+
+import java.util.ConcurrentModificationException;
 
 public class Requests extends RequestDonationList{
 
@@ -16,7 +19,7 @@ public class Requests extends RequestDonationList{
         double rdQu = rd.getQuantity();
 
         try {
-
+         outer:
           for (RequestDonation currentDonation : Organization.getCurrentDonations().getRdEntities()) {
 
               if (rdID == currentDonation.getID())
@@ -26,11 +29,11 @@ public class Requests extends RequestDonationList{
                   }
 
 
-              for (var currBenef : Organization.getBeneficiaryList()) {
+              for (Beneficiary currBenef : Organization.getBeneficiaryList()) {
 
-                  if (currBenef.getRequestsList().get(rdID)!= null) {
+                  if (currBenef.getPhone().equals(Menu.getCurrUserPhone())) {
                       if (validRequestDonation(rd, currBenef) )
-                          break;
+                          break outer;
                       else
                           throw new RuntimeException("Beneficiary: " + currBenef.getName() + " is not allowed to have " + rd.getEntity().getEntityInfo());
                   }
@@ -92,39 +95,64 @@ public class Requests extends RequestDonationList{
 
            if (Person == 1) {
                double Level1Q = ((Material) rd.getEntity()).getLevel1();
+
                boolean check1 = Quant <= Level1Q;
+               boolean insidecheck = false;
                if(check1)
                {
-                   for(RequestDonation rdEntity : be.getRecievedList().getRdEntities() )
+                   for(RequestDonation rdEntity : getRdEntities() )
                        if(rdID == rdEntity.getID()){
+                           insidecheck = true;
                            check2 = (Quant + rdEntity.getQuantity()) <= Level1Q;
+
                            break;
                        }
+                   if(!insidecheck){
+
+                       check2 = Quant <= Level1Q;
+                   }
                }
 
 
            } else if (2 <= Person && Person <= 4) {
                double Level2Q = ((Material) rd.getEntity()).getLevel2();
+
                boolean check1 = Quant <= Level2Q;
+               boolean insidecheck = false;
                if(check1)
                {
-                   for(RequestDonation rdEntity : be.getRecievedList().getRdEntities() )
+
+                   for(RequestDonation rdEntity : getRdEntities() )
                        if(rdID == rdEntity.getID()){
+                           insidecheck = true;
                            check2 = (Quant + rdEntity.getQuantity()) <= Level2Q;
+
                            break;
                        }
+                   if(!insidecheck){
+
+                       check2 = Quant <= Level2Q;
+                   }
                }
 
            } else {
                double Level3Q = ((Material) rd.getEntity()).getLevel3();
                boolean check1 = Quant <= Level3Q;
+
+               boolean insidecheck = false;
                if(check1)
                {
-                   for(RequestDonation rdEntity : be.getRecievedList().getRdEntities() )
+                   for(RequestDonation rdEntity : getRdEntities() )
                        if(rdID == rdEntity.getID()){
+                           insidecheck = true;
                            check2 = (Quant + rdEntity.getQuantity()) <= Level3Q;
+
                            break;
                        }
+                   if(!insidecheck){
+
+                       check2 = Quant <= Level3Q;
+                   }
                }
 
            }
@@ -138,6 +166,7 @@ public class Requests extends RequestDonationList{
     }
 
     public void commit(){
+        boolean exist = false;
         for(RequestDonation requestedDon: getRdEntities()){
             try {
                 Beneficiary currBen = null;
@@ -152,30 +181,39 @@ public class Requests extends RequestDonationList{
                             throw new RuntimeException("This quantity is not currently available, we deeply apologize.");
                         }
 
-                    for(var currBenef: Organization.getBeneficiaryList()){
+                    for(Beneficiary currBenef: Organization.getBeneficiaryList()){
 
-                        if(currBenef.getRequestsList().get(currID) != null ){
+                        if(currBenef.getPhone().equals(Menu.getCurrUserPhone())) {
+                                if (currBenef.getRequestsList().get(currID) != null) {
 
-                            if(validRequestDonation(requestedDon , currBenef) ) {
-                                currBen = currBenef;
-                                break;
-                            }
-                            else
-                                throw new RuntimeException("Beneficiary: "+currBenef.getName() +" is not allowed to have "+requestedDon.getEntity().getEntityInfo());
+                                    exist = true;
+
+                                    if (validRequestDonation(requestedDon, currBenef)) {
+                                        currBen = currBenef;
+                                        break;
+                                    } else
+                                        throw new RuntimeException("Beneficiary: " + currBenef.getName() + " is not allowed to have entity with:\n " + requestedDon.getEntity().getEntityInfo());
 
 
+                                }
                         }
                     }
+
+
                     currentDonation.setQuantity(currentDonation.getQuantity()-currQuantity);
                     getRdEntities().remove(requestedDon);
                     currBen.getRecievedList().add(requestedDon);
+                    break;
 
                 }
-
-            }catch (RuntimeException e){
+                System.out.println("Commit Succesful");
+                break;
+            }catch (RuntimeException e ){
                 System.err.println(e);
             }
 
+        }  if(!exist){
+            System.out.println("There are not any Requests to commit.");
         }
     }
 
