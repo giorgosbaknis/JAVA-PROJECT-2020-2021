@@ -67,7 +67,7 @@ public class Organization {
 
     }
     //H methodos contains se ena arraylist einai boolean
-    public void  insertDonator(Donator donator){
+    public static void  insertDonator(Donator donator){
 
         try {
 
@@ -91,7 +91,7 @@ public class Organization {
             donatorList.remove(donator);}
     }
 
-    public  void  insertBeneficiary(Beneficiary beneficiary){
+    public  static void  insertBeneficiary(Beneficiary beneficiary){
 
         try {
 

@@ -184,18 +184,16 @@ public class Requests extends RequestDonationList{
                     for(Beneficiary currBenef: Organization.getBeneficiaryList()){
 
                         if(currBenef.getPhone().equals(Menu.getCurrUserPhone())) {
-                                if (currBenef.getRequestsList().get(currID) != null) {
 
-                                    exist = true;
-
-                                    if (validRequestDonation(requestedDon, currBenef)) {
-                                        currBen = currBenef;
-                                        break;
-                                    } else
-                                        throw new RuntimeException("Beneficiary: " + currBenef.getName() + " is not allowed to have entity with:\n " + requestedDon.getEntity().getEntityInfo());
+                            exist = true;
+                            if (validRequestDonation(requestedDon, currBenef)) {
+                                currBen = currBenef;
+                                break;
+                            } else
+                                throw new RuntimeException("Beneficiary: " + currBenef.getName() + " is not allowed to have entity with:\n " + requestedDon.getEntity().getEntityInfo());
 
 
-                                }
+
                         }
                     }
 
