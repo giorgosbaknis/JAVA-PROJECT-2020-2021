@@ -1,5 +1,6 @@
 package REQUESTS;
 
+import ENTITY.Main;
 import ENTITY.Material;
 import ENTITY.Service;
 import MENU.Menu;
@@ -17,7 +18,7 @@ public class Requests extends RequestDonationList{
     public void add(RequestDonation rd) {
         int rdID = rd.getID();
         double rdQu = rd.getQuantity();
-
+        boolean allow=false;
         try {
          outer:
           for (RequestDonation currentDonation : Organization.getCurrentDonations().getRdEntities()) {
@@ -31,16 +32,21 @@ public class Requests extends RequestDonationList{
 
               for (Beneficiary currBenef : Organization.getBeneficiaryList()) {
 
-                  if (currBenef.getPhone().equals(Menu.getCurrUserPhone())) {
-                      if (validRequestDonation(rd, currBenef) )
+                  if (currBenef.getPhone().equals(Menu.getCurrUserPhone()) || currBenef.getPhone().equals(Main.getCurrUserPhone())){
+                      if (validRequestDonation(rd, currBenef) ) {
+                          allow =true;
                           break outer;
+                      }
                       else
                           throw new RuntimeException("Beneficiary: " + currBenef.getName() + " is not allowed to have " + rd.getEntity().getEntityInfo());
                   }
               }
           }
-            super.add(rd);
-            System.out.println("Request was succesfully made.");
+          if(allow) {
+              super.add(rd);
+              System.out.println("Request was succesfully made.");
+          }
+          else System.out.println("Not Valid Request");
 
       }catch (RuntimeException e){
           System.err.println(e);
@@ -159,9 +165,7 @@ public class Requests extends RequestDonationList{
 
            return check2;
 
-
        }else return true;
-
 
     }
 
