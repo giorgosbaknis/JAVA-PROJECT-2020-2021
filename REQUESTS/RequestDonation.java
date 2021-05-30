@@ -39,6 +39,6 @@ public class RequestDonation implements Comparable<RequestDonation> { //Comparab
     @Override
     public String toString(){
         return "Entity: " + entity +
-                "Quantity: " + quantity;
+                " Quantity: " + quantity;
     }
 }

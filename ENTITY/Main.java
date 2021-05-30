@@ -13,17 +13,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        /*
-        //Test Service
-        Service se = new Service("NurserySupport", "nosokoma", 5);
-        Service se = new Service("NurserySupport", "nosokoma", 5);
-        Service se = new Service("NurserySupport", "nosokoma", 5);
-        System.out.println(se.toString());
 
-        //Test Material
-        Material mat = new Material("milk", "gala",2,1,2,3);
-        System.out.println(mat.toString());
-         */
         Organization org = new Organization();
         Material milk = new Material("milk", "Milk", 1, 10, 20, 40);
         Material sugar = new Material("sugar", "Sugar", 2, 2, 3, 4);
@@ -38,6 +28,7 @@ public class Main {
         Beneficiary beneficiary1 =new Beneficiary("Kostas","6975554123",2);
         Beneficiary beneficiary2 =new Beneficiary("Maria","6985554169",3);
         Donator donator = new Donator("Babis", "697666666");
+        Donator donator1 = new Donator("Danah","1234");
         org.addEntity(milk);
         org.addEntity(BabySitting);
         org.addEntity(rice);
@@ -45,15 +36,17 @@ public class Main {
         Organization.insertBeneficiary(beneficiary1);
         Organization.insertBeneficiary(beneficiary2);
         Organization.insertDonator(donator);
+        Organization.insertDonator(donator1);
 
-        donator.add(new RequestDonation(milk,1000));
-        donator.add(new RequestDonation(rice,40));
-        donator.commit();
-        System.out.println(Organization.getCurrentDonations().getRdEntities());
 
-        currStringPhone = beneficiary1.getPhone();
-        beneficiary1.addRequest(new RequestDonation(milk,1));
-        beneficiary1.addRequest(new RequestDonation(rice,1));
+       // donator.add(new RequestDonation(milk,1000));
+       // donator.add(new RequestDonation(rice,40));
+       // donator.commit();
+        //System.out.println(Organization.getCurrentDonations().getRdEntities());
+
+        //currStringPhone = beneficiary1.getPhone();
+        //beneficiary1.addRequest(new RequestDonation(milk,1));
+        //beneficiary1.addRequest(new RequestDonation(rice,1));
 
 
 

@@ -531,9 +531,7 @@ public class Menu {
                                                                             for (RequestDonation DonSearch : Organization.getCurrentDonations().getRdEntities()) { //tsekarei an yparxei hdh donation apo ayto to object
                                                                                 if (materials.get(antikd1 - 1).getId() == DonSearch.getID()) {
 
-                                                                                    RequestDonation temp1 = DonSearch;
-                                                                                    temp1.setQuantity(amount);
-
+                                                                                    RequestDonation temp1 = new RequestDonation(DonSearch.getEntity(), amount);
                                                                                     don.add(temp1);
                                                                                     System.out.println("Donation was succesful");
 
@@ -637,8 +635,7 @@ public class Menu {
                                                                                 for (RequestDonation DonSearch : Organization.getCurrentDonations().getRdEntities()) { //tsekarei an yparxei hdh donation apo ayto to object
                                                                                     if (services.get(antik - 1).getId() == DonSearch.getID()) {
 
-                                                                                        RequestDonation temp3 = DonSearch;
-                                                                                        temp3.setQuantity(hours);
+                                                                                        RequestDonation temp3 = new RequestDonation(DonSearch.getEntity(), hours);
 
                                                                                         don.add(temp3);
                                                                                         break while3;
@@ -800,7 +797,6 @@ public class Menu {
 
                                             don.commit();
                                             System.out.println("Commit successful.");
-                                            System.out.println("YOURS TRULY "+Organization.getCurrentDonations().getRdEntities());
                                             break;
 
 
@@ -826,7 +822,6 @@ public class Menu {
                     case 3:
                         don.commit();
                         System.out.println("Commit succesful");
-                        System.out.println("YOURS TRULY "+Organization.getCurrentDonations().getRdEntities());
                         break;
                     case 4:
                         break;
