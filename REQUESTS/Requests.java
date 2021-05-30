@@ -10,7 +10,8 @@ import java.util.ConcurrentModificationException;
 
 public class Requests extends RequestDonationList{
 
-    //prepei na vroume mesw ths RDL tin id toy entity pu zhthse o Bene , kai meta na pame mesw Organa na vroume kai na sygkrinoume posothtes
+//prepei na vroume mesw ths RDL tin id toy entity pu zhthse o Beneficiary
+// kai meta na pame mesw Organization na vroume kai na sygkrinoume posothtes
 
 
 
@@ -21,28 +22,28 @@ public class Requests extends RequestDonationList{
         boolean allow=false;
         try {
          outer:
-          for (RequestDonation currentDonation : Organization.getCurrentDonations().getRdEntities()) {
+          for (RequestDonation currentDonation : Organization.getCurrentDonations().getRdEntities()) { //kanei diaperash ta antikeimena poy parexei h Etairia
 
-              if (rdID == currentDonation.getID())
+              if (rdID == currentDonation.getID()) //Tsekarei ta id gia na vrei an einai to idio antikeimeno
 
-                  if (rdQu > currentDonation.getQuantity()) {
-                      throw new RuntimeException("This quantity is not currently available, we deeply apologize.");
+                  if (rdQu > currentDonation.getQuantity()) { //Sygkrinei posothtes kai an o Benefi zhthsei perisoterh
+                      throw new RuntimeException("This quantity is not currently available, we deeply apologize."); //apo oti yparxei synolika sthn etairia petaei exception
                   }
 
 
-              for (Beneficiary currBenef : Organization.getBeneficiaryList()) {
+              for (Beneficiary currBenef : Organization.getBeneficiaryList()) { //diaperash toys Bene
 
-                  if (currBenef.getPhone().equals(Menu.getCurrUserPhone()) || currBenef.getPhone().equals(Main.getCurrUserPhone())){
-                      if (validRequestDonation(rd, currBenef) ) {
+                  if (currBenef.getPhone().equals(Menu.getCurrUserPhone()) || currBenef.getPhone().equals(Main.getCurrUserPhone())){ //sygkrinei ta thlefwna wste na vrei poios einai o trexwn Beneficiary
+                      if (validRequestDonation(rd, currBenef) ) {   // Sintihikes sto validRD                                       // eite apo thn  Menu eite apo thn Main
                           allow =true;
                           break outer;
                       }
                       else
-                          throw new RuntimeException("Beneficiary: " + currBenef.getName() + " is not allowed to have " + rd.getEntity().getEntityInfo());
+                          throw new RuntimeException("Beneficiary: " + currBenef.getName() + " is not allowed to have " + rd.getEntity().getEntityInfo()); //an den isxioyn petaei esception
                   }
               }
           }
-          if(allow) {
+          if(allow) { //tsekarei an isxian h synthikes kai kalh thn ADD ths mamas
               super.add(rd);
               System.out.println("Request was succesfully made.");
           }
@@ -58,32 +59,37 @@ public class Requests extends RequestDonationList{
     public void modify(RequestDonation rd) {
         int id = rd.getID();
         double quantity = rd.getQuantity();
+        boolean allow=false;
         try {
 
-            for (RequestDonation currentDona : Organization.getCurrentDonations().getRdEntities()) {
+            for (RequestDonation currentDona : Organization.getCurrentDonations().getRdEntities()) { //patse ta current Antikeimena poy diakinei to Company
 
-                if (id == currentDona.getID())
+                if (id == currentDona.getID()) //vriskei an yparxei to zhtoumeno antikeimeno
 
-                    if (quantity > currentDona.getQuantity()) {
+                    if (quantity > currentDona.getQuantity()) { //An o bene zhtaei parapanw posothta petaei exception
                         throw new RuntimeException("This quantity is not currently available, we deeply apologize.");
                     }
 
 
                 for (var currBenef : Organization.getBeneficiaryList()) {
 
-                    if (currBenef.getRequestsList().get(id) != null) {
-                        if (validRequestDonation(rd, currBenef))
+                    if (currBenef.getPhone().equals(Menu.getCurrUserPhone()) || currBenef.getPhone().equals(Main.getCurrUserPhone())){ //omoiws me apo panw sthn add
+                        if (validRequestDonation(rd, currBenef)) {
+                            allow = true;
                             break;
+                        }
                         else
                             throw new RuntimeException("Beneficiary: " + currBenef.getName() + " is not allowed to have " + rd.getEntity().getEntityInfo());
 
-
-                    }
+                    }       //idia me thn add
 
                 }
             }
-                super.modify(rd);
-                System.out.println("Request was succesfully made.");
+            if(allow) {
+                super.modify(rd); //kalei thn modify ths mamas klasshs
+                System.out.println("Request was succesfully modified.");
+            }
+            else System.out.println("Not Valid modification");
 
         }catch (RuntimeException e){
             System.err.println(e);
@@ -93,37 +99,37 @@ public class Requests extends RequestDonationList{
 
 
     public boolean validRequestDonation(RequestDonation rd, Beneficiary be){
-       if(rd.getEntity() instanceof Material) {
-           int Person = be.getNoPersorns();
+       if(rd.getEntity() instanceof Material) { //an to antikeimeno einai material //h instanceof einai boolean
+           int Person = be.getNoPersorns(); //pernei ta posa atoma exei sthn familia o Beneficiary
            int rdID =  rd.getID();
            double Quant = rd.getQuantity();
            boolean check2 = false;
 
            if (Person == 1) {
-               double Level1Q = ((Material) rd.getEntity()).getLevel1();
+               double Level1Q = ((Material) rd.getEntity()).getLevel1(); //pernei thn posothta level1 toy antikeimenoy
 
-               boolean check1 = Quant <= Level1Q;
+               boolean check1 = Quant <= Level1Q; //tsekarei an to POSO poy exei zhthsei o Bene einai mikrotero iso apo ayto p dikaioytai
                boolean insidecheck = false;
-               if(check1)
+               if(check1) //an isxyei h prwth synthikh
                {
-                   for(RequestDonation rdEntity : getRdEntities() )
-                       if(rdID == rdEntity.getID()){
+                   for(RequestDonation rdEntity : getRdEntities() ) //kanei diaperash ta Entities
+                       if(rdID == rdEntity.getID()){ //tsekarei an einai to idio antikeimeno
                            insidecheck = true;
-                           check2 = (Quant + rdEntity.getQuantity()) <= Level1Q;
+                           check2 = (Quant + rdEntity.getQuantity()) <= Level1Q; //Tsekarei an h posothta poy zhthse syn ayth poy exei hdh parei einai egkyrh
 
                            break;
                        }
                    if(!insidecheck){
 
-                       check2 = Quant <= Level1Q;
+                       check2 = true; //an den exei paralavei hdh posothta kanei to check2 idio me to check1 dhladh true
                    }
                }
 
 
            } else if (2 <= Person && Person <= 4) {
-               double Level2Q = ((Material) rd.getEntity()).getLevel2();
+               double Level2Q = ((Material) rd.getEntity()).getLevel2(); //pernei thn posothta level2 toy antikeimenoy
 
-               boolean check1 = Quant <= Level2Q;
+               boolean check1 = Quant <= Level2Q; //tsekarei an to POSO poy exei zhthsei o Bene einai mikrotero iso apo ayto p dikaioytai
                boolean insidecheck = false;
                if(check1)
                {
@@ -131,19 +137,19 @@ public class Requests extends RequestDonationList{
                    for(RequestDonation rdEntity : getRdEntities() )
                        if(rdID == rdEntity.getID()){
                            insidecheck = true;
-                           check2 = (Quant + rdEntity.getQuantity()) <= Level2Q;
+                           check2 = (Quant + rdEntity.getQuantity()) <= Level2Q; //Tsekarei an h posothta poy zhthse syn ayth poy exei hdh parei einai egkyrh
 
                            break;
                        }
-                   if(!insidecheck){
+                   if(!insidecheck){ //an den exei paralavei hdh posothta kanei to check2 idio me to check1 dhladh true
 
-                       check2 = Quant <= Level2Q;
+                       check2 = true;
                    }
                }
 
            } else {
-               double Level3Q = ((Material) rd.getEntity()).getLevel3();
-               boolean check1 = Quant <= Level3Q;
+               double Level3Q = ((Material) rd.getEntity()).getLevel3(); //pernei thn posothta level3 toy antikeimenoy
+               boolean check1 = Quant <= Level3Q; //tsekarei an to POSO poy exei zhthsei o Bene einai mikrotero iso apo ayto p dikaioytai
 
                boolean insidecheck = false;
                if(check1)
@@ -151,77 +157,74 @@ public class Requests extends RequestDonationList{
                    for(RequestDonation rdEntity : getRdEntities() )
                        if(rdID == rdEntity.getID()){
                            insidecheck = true;
-                           check2 = (Quant + rdEntity.getQuantity()) <= Level3Q;
+                           check2 = (Quant + rdEntity.getQuantity()) <= Level3Q; //Tsekarei an h posothta poy zhthse syn ayth poy exei hdh parei einai egkyrh
 
                            break;
                        }
-                   if(!insidecheck){
+                   if(!insidecheck){ //an den exei paralavei hdh posothta kanei to check2 idio me to check1 dhladh true
 
-                       check2 = Quant <= Level3Q;
+                       check2 = true;
                    }
                }
 
            }
 
-           return check2;
+           return check2; //epistrefei thn deyterh synthikh gia na kathorisei an isxioyn h proypotheseis h oxi
 
-       }else return true;
+       }else return true; //an den einai material einai service opote panta petaei true apo EKFWNHSH
 
     }
 
     public void commit(){
         boolean exist = false;
-        for(RequestDonation requestedDon: getRdEntities()){
+        for(RequestDonation requestedDon: getRdEntities()){ //diaperash Ta Antikeimena
             try {
-                Beneficiary currBen = null;
+                Beneficiary currBen = null; //kenos beneficiary
                 int currID = requestedDon.getID();
                 double currQuantity = requestedDon.getQuantity();
 
                 for (RequestDonation currentDonation : Organization.getCurrentDonations().getRdEntities()) {
 
-                    if (currID == currentDonation.getID())
+                    if (currID == currentDonation.getID()) // vriskei to antikeimeno
 
-                        if (currQuantity > currentDonation.getQuantity()) {
-                            throw new RuntimeException("This quantity is not currently available, we deeply apologize.");
+                        if (currQuantity > currentDonation.getQuantity()) { //an sto antikemeno poy paei na zhthsei exei megalytero amount apo oti yparxei
+                            throw new RuntimeException("This quantity is not currently available, we deeply apologize."); //tote petaei exception
                         }
 
                     for(Beneficiary currBenef: Organization.getBeneficiaryList()){
 
-                        if(currBenef.getPhone().equals(Menu.getCurrUserPhone())) {
-
+                        if(currBenef.getPhone().equals(Menu.getCurrUserPhone()) || currBenef.getPhone().equals(Main.getCurrUserPhone())) {
+                                                            //tsekarei an einai o current Beneficiary
                             exist = true;
-                            if (validRequestDonation(requestedDon, currBenef)) {
-                                currBen = currBenef;
+                            if (validRequestDonation(requestedDon, currBenef)) { //Tsekarei an einai valid to donation ksana
+                                currBen = currBenef; //afoy vrikame to beneficiary mas to vazoyme ston apo panw epeidh ayto einai temp metavlhth o currBenef
                                 break;
                             } else
                                 throw new RuntimeException("Beneficiary: " + currBenef.getName() + " is not allowed to have entity with:\n " + requestedDon.getEntity().getEntityInfo());
-
+                                //An den dikaioutai petaei exception
 
 
                         }
                     }
 
 
-                    currentDonation.setQuantity(currentDonation.getQuantity()-currQuantity);
-                    getRdEntities().remove(requestedDon);
-                    currBen.getRecievedList().add(requestedDon);
-                    break;
+                    currentDonation.setQuantity(currentDonation.getQuantity()-currQuantity); //afairei apo thn posothta toy antikeimenoy
+                    // poy exei o Organismos thn posothta poy zhththike
+                    getRdEntities().remove(requestedDon); //afairei apo ta Requests toy Beneficiary to antikemno
+                    currBen.getRecievedList().add(requestedDon); //O Beneficiary paralambanei ayto poy zhthse sto RecievedList toy
+                    break; //afoy egine to commit fevgei apo to for poy pernei ta antikeimena poy dinei o Organization
 
                 }
                 System.out.println("Commit Succesful");
-                break;
+                break; //afoy egine to commit fevgei apo to for poy psaxnei ta antikeimena poy dinei o bene
             }catch (RuntimeException e ){
                 System.err.println(e);
             }
 
         }  if(!exist){
-            System.out.println("There are not any Requests to commit.");
+            System.out.println("There are not any Requests to commit."); // an den vrethei kapoios beneficiary me tetoia Request teleiwnei h methodos
         }
     }
-
-
-
-
 
 
 }

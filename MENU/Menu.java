@@ -1079,7 +1079,7 @@ public class Menu {
                                                                     checked = sc.nextLine().toLowerCase();
 
                                                                     if (checked.equals("yes")) {
-                                                                        Organization.removeDonator(Organization.getDonatorList().get(inpd - 1), currUserPhone);
+                                                                        Organization.removeDonator(Organization.getDonatorList().get(inpd - 1));
                                                                         System.out.println("Donator deleted. ");
                                                                         break inner3;
 
@@ -1118,8 +1118,6 @@ public class Menu {
                                     }
                                 }
 
-
-
                         }
                         break;
 
@@ -1141,8 +1139,6 @@ public class Menu {
 
 
     }
-
-
 
 
 }
