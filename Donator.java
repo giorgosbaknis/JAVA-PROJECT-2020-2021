@@ -14,10 +14,9 @@ public class Donator extends User{
     }
     public void add(RequestDonation rd){offerList.add(rd);}//prosthetei 1 antikeimeno rd sthn lista offerList
     public void modify(RequestDonation rd){offerList.modify(rd);}//tropopoiei 1 antikeimeno
-    public void remove(RequestDonation rd){offerList.remove(rd);}//
-    public void monitor(){offerList.monitor();}
-    public void commit(){offerList.commit();}
-    public void reset(){offerList.reset();}
-
+    public void remove(RequestDonation rd){offerList.remove(rd);}//afairei ena antikeimeno rd apo to offerList
+    public void monitor(){offerList.monitor();}//emfanizei plhrofories gia thn offerList
+    public void commit(){offerList.commit();}//metaferei ta dedomena sta requestDonation
+    public void reset(){offerList.reset();}//kanei reset thn offerList
 
 }

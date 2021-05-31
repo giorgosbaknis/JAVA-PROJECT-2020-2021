@@ -1,130 +1,141 @@
 
-
 import java.util.*;
 
 
 public class Menu {
-    private static String currUserPhone;
+    private static String currUserPhone;//metavlhth sthn opoia apothikevoyme to thl tou current User
 
+    //epistrefei to thlefwno tou User                   //
     public static String getCurrUserPhone() {
         return currUserPhone;
     }
 
-    public void check(){
+    public void check() {
 
-        try (Scanner sc = new Scanner(System.in)) {
-            while(true) {
+        try (Scanner sc = new Scanner(System.in)) { // anoigoyme thn scanner wste na paroyme input
+            while (true) {
                 big:
                 while (true) {
 
 
-                        String currPhone = "";
+                    String currPhone = "";
 
-                        System.out.println("Give your phone number: "); //mas leipei h eggrafh
+                    System.out.println("Give your phone number: "); //mas leipei h eggrafh
 
-                        boolean found = false;
+                    boolean found = false;
+
+                    currUserPhone = currPhone = sc.nextLine().strip(); //.strip wste na mhn parei ta kena toy input aptin arxi kai telos
+                    checking:
+                    while (true) { //an aplws o xrhsths pathsei enter synexizei na zhtaei thlefwno
+
+                        System.out.println("Give a valid phone number: "); //mas leipei h eggrafh
 
                         currUserPhone = currPhone = sc.nextLine().strip();
 
-                        while (currPhone.length() == 0) {
-
-                            System.out.println("Give a valid phone number: "); //mas leipei h eggrafh
-
-                            currUserPhone = currPhone = sc.nextLine().strip();
-
-                        }
-
-
-                    for (Beneficiary currBen : Organization.getBeneficiaryList()) {
-                        if (currPhone.equals(currBen.getPhone())) {
-                            found = true;
-                            printMenuBene(currBen);
-                            break big;
-
-                        }
-                    }
-
-                    for (Donator currDon : Organization.getDonatorList()) {
-                        if (currPhone.equals(currDon.getPhone())) {
-                            found = true;
-                            printMenuDon(currDon);
-                            break big;
-                        }
-                    }
-                    if (currPhone.equals(Organization.getAdmin().getPhone())) {
-                        printMenuAdmin(Organization.getAdmin());
-                        found = true;
-                        break big;
-                    }
-                    outer:
-                    while (true) {
-                        if (!found ) {
-                            System.out.println("You are not registred in the system. Do you want to be a 1.Donator or a 2.Beneficiary");
-                            if (sc.hasNextInt()) {
-                                int choise = sc.nextInt();
-                                sc.nextLine();
-
-                                switch (choise) {
-                                    case 1:
-                                        System.out.println("What is your name? ");
-                                        Organization.insertDonator(new Donator(sc.nextLine(), currPhone));
-                                        System.out.println("Registration Successful. ");
-                                        found = true;
-                                        break outer;
-
-
-                                    case 2:
-                                        System.out.println("What's your name? ");
-                                        String name = sc.nextLine();
-
-                                        while (true) {
-                                            System.out.println("How many members do you have in your family? ");
-                                            if (sc.hasNextInt()) {
-                                                int choi = Math.abs(sc.nextInt());
-                                                choi = Math.abs(choi);
-
-                                                if (choi > 0) {
-                                                    Organization.insertBeneficiary(new Beneficiary(sc.nextLine(), currPhone, choi));
-                                                    System.out.println("Registration Successful. ");
-                                                    found = true;
-                                                    break outer;
-                                                } else {
-                                                    System.out.println("Your family has to have at least 1 person (that is including you) .");
-
-                                                }
-
-                                            } else {
-                                                sc.nextLine();
-                                                System.out.println("Not a number.");
-                                            }
-                                        }
-
-
-                                    default:
-                                        System.out.println("Not a valid choice . Please choose again. ");
-                                        break;
-
+                        for (int i = 0; i < currPhone.length(); i++) {
+                            if (currPhone.charAt(i) > '9' || currPhone.charAt(i) < '0') {
+                                currPhone = "";
+                                break;
+                            } else if (i == currPhone.length() - 1) {
+                                if (currPhone.length() != 10) {
 
                                 }
-
-
-                            } else {
-                                sc.nextLine();
-                                System.out.println("Not a valid choice.");
+                                break checking;
                             }
+                        }
 
+
+                        for (Beneficiary currBen : Organization.getBeneficiaryList()) {
+                            if (currPhone.equals(currBen.getPhone())) { //vriskoyme an to curr Thlefwno antistoixei se kapoio Beneficiary
+                                found = true;
+                                printMenuBene(currBen); //kalei to Menu gia beneficiary
+                                break big; //break to big gia na ksansazhthsei thlefwno
+
+                            }
+                        }
+
+                        for (Donator currDon : Organization.getDonatorList()) {
+                            if (currPhone.equals(currDon.getPhone())) { //vriskoyme an to curr Thlefwno antistoixei se kapoio Donator
+                                found = true;
+                                printMenuDon(currDon);
+                                break big; //break to big gia na ksansazhthsei thlefwno
+                            }
+                        }
+                        if (currPhone.equals(Organization.getAdmin().getPhone())) { //vriskoyme an to curr Thlefwno antistoixei ston Admin
+                            printMenuAdmin(Organization.getAdmin());
+                            found = true;
+                            break big; //break to big gia na ksansazhthsei thlefwno
+                        }
+                        outer:
+                        while (true) {
+                            if (!found) {
+                                System.out.println("You are not registred in the system. Do you want to be a 1.Donator or a 2.Beneficiary");
+                                if (sc.hasNextInt()) {
+                                    int choise = sc.nextInt();
+                                    sc.nextLine(); //ta nextLine ypoxretwtika opoy xrhsimopoieitai scanner
+                                    //an den einai eggegramenos ton rwtaei an thelei na einai Bene h Dona
+                                    switch (choise) {
+                                        case 1:
+                                            System.out.println("What is your name? ");
+                                            Organization.insertDonator(new Donator(sc.nextLine(), currPhone)); // ton eisagei ston Organismo
+                                            System.out.println("Registration Successful. ");
+                                            found = true;
+                                            break outer;
+
+
+                                        case 2:
+                                            System.out.println("What's your name? ");
+                                            String name = sc.nextLine();
+
+                                            while (true) {
+                                                System.out.println("How many members do you have in your family? ");
+                                                if (sc.hasNextInt()) {
+                                                    int choi = Math.abs(sc.nextInt());
+                                                    choi = Math.abs(choi); //pernei apolyth timh gia to posa atoma exei
+
+                                                    if (choi > 0) { //exei toyl ena 1 atomo sta Persons ton eayto toy dld
+                                                        Organization.insertBeneficiary(new Beneficiary(sc.nextLine(), currPhone, choi)); // ton eisagei ston Organismo
+                                                        System.out.println("Registration Successful. ");
+                                                        found = true;
+                                                        break outer;
+                                                    } else {
+                                                        System.out.println("Your family has to have at least 1 person (that is including you) .");
+
+                                                    }
+
+                                                } else {
+                                                    sc.nextLine();
+                                                    System.out.println("Not a number.");
+                                                }
+                                            }
+
+
+                                        default:
+                                            System.out.println("Not a valid choice . Please choose again. ");
+                                            break;
+
+
+                                    }
+
+
+                                } else {
+                                    sc.nextLine();
+                                    System.out.println("Not a valid choice.");
+                                }
+
+                            }
                         }
                     }
                 }
-                }
-
-            } catch (Exception E) {
-                System.err.println(E);
             }
-
-
-
+        }catch(Exception E)
+    {
+        System.err.println(E);
     }
+
+}
+
+
 
     public void printMenuBene(Beneficiary be){
         System.out.println("Hello "+be.getName() +'\n'+"Your phone is :"+be.getPhone()); //ONOMA ORGANAT?????
@@ -144,7 +155,7 @@ public class Menu {
                     System.out.println("6.Exit");
                     if (sc.hasNextInt()) {
                         epil = sc.nextInt();
-                        sc.nextLine();
+                        sc.nextLine(); //ta nextLine ypoxretwtika opoy xrhsimopoieitai scanner
                         break;
                     }else
                         sc.nextLine();
@@ -156,41 +167,42 @@ public class Menu {
                         while (true) {
                                 int counter = 0;
                                 System.out.print("1.Material");
-                                for (int i = 0; i < Organization.getEntityList().size(); i++) {
+                                for (int i = 0; i < Organization.getEntityList().size(); i++) { //metrame posa einai ta material sto organismo gia ta typwsei meta
                                     if (Organization.getEntityList().get(i) instanceof Material)
                                         counter++;
                                 }
                                 System.out.println("(" + counter + ")");
                                 System.out.println("2.Serivce " + '(' + (Organization.getEntityList().size() - counter) + ')');
-                                int epild1;
+                                int epild1; //ta synolika- ta material einai osa einai ta service
 
                             System.out.println("Which Category do you want?");
                             System.out.println("Press 4 to go back");
-                            if (sc.hasNextInt()) {
+                            if (sc.hasNextInt()) { //epilegei mia apo tis 2 kathgories
                                 epild1 = sc.nextInt();
-                                sc.nextLine();
+                                sc.nextLine(); //ta nextLine ypoxretwtika opoy xrhsimopoieitai scanner
                                 switch (epild1) {
-                                    case 1:
+                                    case 1: //an epileksei material
 
                                         ArrayList<Entity> materials = new ArrayList<>();
                                         boolean keno = false;
-                                        for (int i = 0; i < Organization.getEntityList().size(); i++) {
+                                        for (int i = 0; i < Organization.getEntityList().size(); i++) { //diaperash ta entities toy organismoy
                                             keno = false;
-                                            if (Organization.getEntityList().get(i) instanceof Material) {
-                                                materials.add(Organization.getEntityList().get(i));
+                                            if (Organization.getEntityList().get(i) instanceof Material) { //an vrei to antikeimeno san material
+                                                materials.add(Organization.getEntityList().get(i)); //to prosthetei se mia arraylist
                                                 System.out.print(materials.size() + "." + Organization.getEntityList().get(i).getName());
+                                                //to material.size dhlwnei th thesi toy antikeimenoy poy typwnoume
+                                                //kai sthn epomenh typwnoyme to onoma toy material mas
 
-
-                                                if (Organization.getCurrentDonations().getRdEntities().size() != 0) // dn eixame kanei elegxo an einai null
+                                                if (Organization.getCurrentDonations().getRdEntities().size() != 0) // dn eixame kanei elegxo an einai kenh
                                                     for (RequestDonation currDon : Organization.getCurrentDonations().getRdEntities()) {
 
-                                                        if (currDon.getID() == Organization.getEntityList().get(i).getId()) {
-                                                            System.out.println(" (" + currDon.getQuantity() + ')');
+                                                        if (currDon.getID() == Organization.getEntityList().get(i).getId()) { //an vrei to antikeimeno oti prosforetai posothta
+                                                            System.out.println(" (" + currDon.getQuantity() + ')'); //thn typwnei apo dipla
                                                             keno=true;
                                                         }
                                                     }
                                                 if(!keno)
-                                                    System.out.println();
+                                                    System.out.println(); //morfopoihsh twn prints
 
 
                                             }
@@ -201,37 +213,37 @@ public class Menu {
                                         while (true) {
                                             int antikd1;
                                             System.out.println("Type the number of your desired Material.");
-                                            if (sc.hasNextInt()) {
+                                            if (sc.hasNextInt()) { //zhtame apto xrhsth poio entity thelei
                                                 antikd1 = sc.nextInt();
-                                                sc.nextLine();
+                                                sc.nextLine();//ta nextLine ypoxretwtika opoy xrhsimopoieitai scanner
                                                 try {
                                                     while2_1:
                                                     while (true) {
-                                                        System.out.println(materials.get(antikd1 - 1).toString());
+                                                        System.out.println(materials.get(antikd1 - 1).toString()); //typwnoyme oles tis leptomeries toy
                                                         System.out.println("Do you want to Request this item? Press y or n for yes or no.");
                                                         System.out.println("Press 4 to go back");
 
 
                                                         String ok;
                                                         ok = sc.nextLine().strip().toLowerCase();
-
+                                                        //.strip gia na fygoyn ta kena apo mpros pisw kai toLowerCase gia na metatrepetai to input panta se mikra
                                                         if (ok.length() == 1) {
-
+                                                        //eksetazoume an edwse 1 mono xarakthra opws zhthsame
                                                             switch (ok.charAt(0)) {
-                                                                case 'y':
+                                                                case 'y': //an thelei na kanei request
                                                                     System.out.println("What amount do you want to get?");
                                                                     double amount;
-                                                                   boolean yparxei = false;
-                                                                    if (sc.hasNextDouble()) {
+                                                                   boolean yparxei = false; // me ayta eksetazoume an prosferetai ayto p zhtaei
+                                                                    if (sc.hasNextDouble()) { //zhtame posothta
                                                                         amount = Math.abs(sc.nextDouble());
                                                                         sc.nextLine();
 
-                                                                        if (Organization.getCurrentDonations().getRdEntities().size() != 0)
+                                                                        if (Organization.getCurrentDonations().getRdEntities().size() != 0)//an den einai adeia h lista
                                                                             for (RequestDonation DonSearch : Organization.getCurrentDonations().getRdEntities()) { //tsekarei an yparxei hdh donation apo ayto to object
-                                                                                if (materials.get(antikd1 - 1).getId() == DonSearch.getID()) {
+                                                                                if (materials.get(antikd1 - 1).getId() == DonSearch.getID()) { //kai vroyme oti yparxei ayto to entity
 
                                                                                     RequestDonation temp1 = new RequestDonation(materials.get(antikd1-1),amount);
-
+                                                                                    //dinoyme san orisma to entity kai to poso poy thelei kai kaloume thn antisoixh methodo
                                                                                     yparxei=true;
                                                                                     be.addRequest(temp1);
 
@@ -244,12 +256,12 @@ public class Menu {
                                                                         else
                                                                             System.out.println("There are no Donations currently");
 
-                                                                        if(!yparxei){
+                                                                        if(!yparxei){ //an dn yparxei tetoio donation katallhlh ektypwsh
                                                                             System.out.println("Donations of this item at this time do not exist.");
                                                                         }
 
                                                                     } else
-                                                                        sc.nextLine();
+                                                                        sc.nextLine();  //ta nextLine ypoxretwtika opoy xrhsimopoieitai scanner
 
                                                                     break;
 
@@ -258,34 +270,34 @@ public class Menu {
                                                                     System.out.println(" You chose to not Request anything.");
                                                                     break while2;
 
-                                                                case '4':
+                                                                case '4': //to back
                                                                     break while2;
-                                                                default:
+                                                                default: //an dwsei asxeto character
                                                                     break;
                                                             }
                                                         }
 
                                                         break;
                                                     }
-                                                } catch (IndexOutOfBoundsException e) {
+                                                } catch (IndexOutOfBoundsException e) { //an dwsei asxeto aithmo entity
                                                     System.err.println(e + "Material with that Number does not exist.");
                                                 }
                                             } else
-                                                sc.nextLine();
+                                                sc.nextLine(); //ta nextLine ypoxretwtika opoy xrhsimopoieitai scanner
                                         }
                                         break;
 
                                     case 2:
                                         ArrayList<Entity> services = new ArrayList<>();
 
-                                        for (int i = 0; i < Organization.getEntityList().size(); i++) {
+                                        for (int i = 0; i < Organization.getEntityList().size(); i++) { //omoiws me thn material
                                             keno = false;
                                             if (Organization.getEntityList().get(i) instanceof Service) {
-                                                services.add(Organization.getEntityList().get(i));
+                                                services.add(Organization.getEntityList().get(i)); //apothikevoume ta services se arraylist
                                                 // System.out.println();
                                                 System.out.print(services.size() + "." + Organization.getEntityList().get(i).getName());
-
-                                                if (Organization.getCurrentDonations().getRdEntities().size() != 0)
+                                                //to megethos toy arraylist dhlwnei kai th thesi toy antikemenou poy kanoume print
+                                                if (Organization.getCurrentDonations().getRdEntities().size() != 0) // an dn einai kenh
                                                     for (RequestDonation currDon : Organization.getCurrentDonations().getRdEntities()) {
 
                                                         if (currDon.getID() == Organization.getEntityList().get(i).getId()) {
@@ -306,12 +318,12 @@ public class Menu {
                                             while4:
                                             while (true) {
                                                 System.out.println("Type the number of your desired Service");
-                                                if (sc.hasNextInt()) {
+                                                if (sc.hasNextInt()) { //poio service thelei
                                                     antik = sc.nextInt();
                                                     sc.nextLine();
                                                     try {
                                                         System.out.println(services.get(antik - 1).toString());
-                                                        System.out.println("Do you want to Request this service? Press y or n for yes or no.");
+                                                        System.out.println("Do you want to Request this service? Press y or n for yes or no."); //omoiws me material
                                                         System.out.println("Press 4 to go back");
                                                         {
                                                             String ok;
@@ -321,7 +333,7 @@ public class Menu {
                                                                 switch (ok.charAt(0)) {
                                                                     case 'y':
                                                                         System.out.println("How many hours do you want to request?");
-                                                                        double hours;
+                                                                        double hours; //wres yphresias anti gia pososthta
                                                                         boolean yparxei = false;
                                                                         if (sc.hasNextDouble()) {
                                                                             hours = Math.abs(sc.nextDouble());

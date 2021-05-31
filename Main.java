@@ -39,6 +39,7 @@ public class Main {
         donator.add(new RequestDonation(sugar,5));
         donator.add(new RequestDonation(peppers,5));
         donator.add(new RequestDonation(cocaine,10));
+        donator.add(new RequestDonation(BabySitting,10));
 
         donator.commit();
 beneficiary1.getRecievedList().reset();
@@ -50,6 +51,7 @@ beneficiary1.getRequestsList().reset();
         beneficiary1.addRequest(new RequestDonation(sugar,1));
         beneficiary1.addRequest(new RequestDonation(peppers,5));
         beneficiary1.addRequest(new RequestDonation(cocaine,4));
+        beneficiary1.addRequest(new RequestDonation(BabySitting,10));
 
         beneficiary1.commitRequests();
 

@@ -175,8 +175,8 @@ public class Requests extends RequestDonationList{
                 try {
                     exist = false;
                     Beneficiary currBen = null; //kenos beneficiary
-                    int currID = getRdEntities().get(i-found).getID();
-                    double currQuantity = getRdEntities().get(i-found).getQuantity();
+                    int currID = getRdEntities().get(i-found).getID(); // apothikevoyme se metavlhth to id toy entity gia to opoio doylevoyme
+                    double currQuantity = getRdEntities().get(i-found).getQuantity(); //apothikevoyme se metavlhth thn posothta toy antikeimenoy poy doylevoyme
 
 
 
@@ -218,7 +218,7 @@ public class Requests extends RequestDonationList{
                         }
                     }
 
-                     //afoy egine to commit fevgei apo to for poy psaxnei ta antikeimena poy dinei o bene
+
                 } catch (RuntimeException e){
                     System.err.println(e);
                 }

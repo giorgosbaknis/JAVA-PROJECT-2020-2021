@@ -162,9 +162,27 @@ public class Organization {
    public static void listBeneficiaries() {
 
        for (int i=0;i<beneficiaryList.size();i++) {
-
+           int count1=0,count2=0;
            System.out.println((i+1) + ". " + beneficiaryList.get(i).getName());
-           beneficiaryList.get(i).getRecievedList().monitor();
+           for(RequestDonation rd : beneficiaryList.get(i).getRecievedList().getRdEntities())
+           {
+
+
+               if(rd.getEntity() instanceof  Material) { //an einai material to typwnei katw apto material
+                   if(count1==0)
+                       System.out.println("\tMaterial:");
+                   count1++;
+                   System.out.println("\t " + rd.getEntity().getName());
+               }
+
+               if(rd.getEntity() instanceof  Service) { //an einai service to typwnei katw apto service
+                   if(count2==0)
+                       System.out.println("\tService:");
+                   count2++;
+                   System.out.println("\t " + rd.getEntity().getName());
+               }
+           }
+
        }
 
     }
