@@ -38,12 +38,15 @@ public class Menu {
                                 break;
                             } else if (i == currPhone.length() - 1) {
                                 if (currPhone.length() != 10) {
-
+                                    System.out.println("Put phone number with 10 digits!!!");
                                 }
-                                break checking;
+                                else{
+                                    break checking;
+                                }
+
                             }
                         }
-
+                    }
 
                         for (Beneficiary currBen : Organization.getBeneficiaryList()) {
                             if (currPhone.equals(currBen.getPhone())) { //vriskoyme an to curr Thlefwno antistoixei se kapoio Beneficiary
@@ -125,7 +128,6 @@ public class Menu {
 
                             }
                         }
-                    }
                 }
             }
         }catch(Exception E)
@@ -402,8 +404,8 @@ public class Menu {
 
 
                     case 2:
-                        if (be.getRequestsList().getRdEntities().size() != 0)
-                            be.showRequests();
+                        if (be.getRequestsList().getRdEntities().size() != 0) //an den einai adeia
+                            be.showRequests(); //deixnei mono ta Request
                         else
                             System.out.println("There are not any requests at this time.");
                         break;
