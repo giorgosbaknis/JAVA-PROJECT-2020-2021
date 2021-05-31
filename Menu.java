@@ -342,9 +342,9 @@ public class Menu {
                                                                             sc.nextLine();
                                                                             if (Organization.getCurrentDonations().getRdEntities().size() != 0)
                                                                                 for (RequestDonation DonSearch : Organization.getCurrentDonations().getRdEntities()) { //tsekarei an yparxei hdh donation apo ayto to object
-                                                                                    if (services.get(antik - 1).getId() == DonSearch.getID()) {
+                                                                                    if (services.get(antik - 1).getId() == DonSearch.getID()) { //an vrei to antikeimeno
 
-                                                                                        RequestDonation temp3 = new RequestDonation(services.get(antik-1),hours);
+                                                                                        RequestDonation temp3 = new RequestDonation(services.get(antik-1),hours); //san orisma dexontai ola RD
 
 
                                                                                         be.addRequest(temp3);
@@ -370,9 +370,9 @@ public class Menu {
                                                                         break while3;
 
                                                                     case '4':
-                                                                        break while3;
+                                                                        break while3; // to back
                                                                     default:
-                                                                        break;
+                                                                        break; //an dwsei axrhsto xarakthra
                                                                 }
                                                             }
                                                         }
@@ -396,7 +396,7 @@ public class Menu {
                                         break;
                                 }
                             } else
-                                sc.nextLine();
+                                sc.nextLine();//ta nextLine aparaitha an xrhsimopoioyme scanner
                         }
                         break;
 
@@ -411,20 +411,19 @@ public class Menu {
                         break;
 
                     case 3:
-                            be.commitRequests();
-
+                            be.commitRequests(); //h diaxeirish exception kai print ginetai sthn commit
                         break;
 
                     case 4:
                         break;
 
                     case 5:
-                        System.out.println("Logging off...");
+                        System.out.println("Logging off..."); //den epistrefei tipota alla termatizei thn methodo kai synexizei kanonika h CHECK
                         return;
                     case 6:
                         System.out.println("Exitting...");
-                        sc.close();
-                        System.exit(0);
+                        sc.close(); //Kleinoyme to scanner
+                        System.exit(0); //kai termatizei teleiws to programma
 
                 }
 
@@ -622,30 +621,30 @@ public class Menu {
                                             while (true) {
                                                 System.out.println("Type the number of your desired Service");
                                                 if (sc.hasNextInt()) {
-                                                    antik = sc.nextInt();
+                                                    antik = sc.nextInt(); //dinoyme sto xrhsth na epileksei service
                                                     sc.nextLine();
                                                     try {
-                                                        System.out.println(services.get(antik - 1).toString());
+                                                        System.out.println(services.get(antik - 1).toString()); //print details apto service p dialekse
                                                         System.out.println("Do you want to offer this service? Press y or n for yes or no.");
                                                         System.out.println("Press 4 to go back");
                                                         {
                                                             String ok;
-                                                            ok = sc.nextLine().strip().toLowerCase();
-                                                            if (ok.length() == 1) {
+                                                            ok = sc.nextLine().strip().toLowerCase(); //input ama thelei to prosferei
+                                                            if (ok.length() == 1) { //an edwse ena char opws toy eipame
 
-                                                                switch (ok.charAt(0)) {
+                                                                switch (ok.charAt(0)) { //diavazei ton character sthn thesi 0 afou h java diavazei string
                                                                     case 'y':
                                                                         System.out.println("How many hours do you want to offer?");
-                                                                        double hours;
+                                                                        double hours; //poses wres thelei an prosferei
                                                                         if (sc.hasNextDouble()) {
-                                                                            hours = Math.abs(sc.nextDouble());
-                                                                            sc.nextLine();
-                                                                            if (Organization.getCurrentDonations().getRdEntities().size() != 0)
+                                                                            hours = Math.abs(sc.nextDouble());//se apolyth timh
+                                                                            sc.nextLine(); // aparaithto afoy yparxei scanner
+                                                                            if (Organization.getCurrentDonations().getRdEntities().size() != 0) //an den einai kenh
                                                                                 for (RequestDonation DonSearch : Organization.getCurrentDonations().getRdEntities()) { //tsekarei an yparxei hdh donation apo ayto to object
-                                                                                    if (services.get(antik - 1).getId() == DonSearch.getID()) {
+                                                                                    if (services.get(antik - 1).getId() == DonSearch.getID()) { //an sysxetistoyn ta dio ID oti einai to idio entity
 
                                                                                         RequestDonation temp3 = new RequestDonation(DonSearch.getEntity(), hours);
-
+                                                                                        //ftiaxnoume ena neo request Donation kai kaloyme thn katallhlh add
                                                                                         don.add(temp3);
                                                                                         break while3;
                                                                                     }
@@ -664,12 +663,12 @@ public class Menu {
                                                                         break;
 
                                                                     case 'n':
-                                                                        System.out.println(" You chose to not donate.");
+                                                                        System.out.println(" You chose to not donate."); //an pathsei den ginetai to donate
                                                                         break while3;
 
-                                                                    case '4':
+                                                                    case '4': // to back
                                                                         break while3;
-                                                                    default:
+                                                                    default: // an pathsei kati akyro poy exei perasei toys prohgoumenos elegxous paei ekei gia na ton ksanarwthsei
                                                                         break;
                                                                 }
                                                             }
@@ -686,10 +685,10 @@ public class Menu {
                                         }
                                         break;
 
-                                    case 4:
+                                    case 4://to back
                                         break innerd1;
 
-                                    default:
+                                    default://akyro input
                                         System.out.println("Number doesnt match any category");
                                         break;
                                 }
@@ -700,10 +699,10 @@ public class Menu {
 
 
                     case 2:
-                        if (don.getOfferList().getRdEntities().size() != 0) {
+                        if (don.getOfferList().getRdEntities().size() != 0) { //an den einai kenh h lista prosforwn
                             outerw:
                             while (true) {
-                                don.getOfferList().monitor();
+                                don.getOfferList().monitor(); //typwnei tis prosfores toy
 
                                 System.out.println("a.Modify you Offer list");
                                 System.out.println("b.Reset Your Offer List");
@@ -711,21 +710,21 @@ public class Menu {
                                 System.out.println("Press 4 to go back.");
                                 char epil2;
                                 String st;
-                                st = sc.nextLine().strip();
+                                st = sc.nextLine().strip(); //zhtame na dwsei epilogh ti tha kanei
 
 
-                                if (st.length() == 1) {
-                                    epil2 = st.charAt(0);
+                                if (st.length() == 1) {//tsekaroume an edwse ena xarakthra
+                                    epil2 = st.charAt(0); //pernoyme to xarakthra sthn thesi 0 mias kai diavazoyme mono string stin java
 
                                     switch (epil2) {
 
-                                        case 'a':
+                                        case 'a': //an thelei na peiraksei thn lista toy
                                                innerw:
                                             while (true) {
                                                 System.out.println("Choose an Entity.");
                                                 if (sc.hasNextInt()) {
                                                     int choice;
-                                                    choice = sc.nextInt();
+                                                    choice = sc.nextInt(); //epilegei entity
                                                     sc.nextLine();
 
 
@@ -735,46 +734,46 @@ public class Menu {
                                                     System.out.println("Press 4 to go back");
 
                                                     if (sc.hasNextInt()) {
-                                                        int chos;
+                                                        int chos; //epilegei ti thelei na kanei
                                                         chos = sc.nextInt();
                                                         sc.nextLine();
 
                                                         switch (chos) {
-                                                            case 1:
+                                                            case 1://an thelei na diagrapsei prosfora toy
                                                                 try {
 
-
+                                                                //afairoyme thn epilogh toy -1 epeidh typwnontai me seira 1. 2. 3. enw ta panta arxizoyn apo to 0
                                                                     don.getOfferList().remove(don.getOfferList().getRdEntities().get(choice - 1));
                                                                     System.out.println("Offer was successfully removed");
                                                                     break;
+                                                                //afairoyme apo thn lista poy periexei h offerlist ena stoixeio ayths ths listas
 
 
-
-                                                                } catch (IndexOutOfBoundsException e) {
+                                                                } catch (IndexOutOfBoundsException e) { //an dwsei entity ektos oriwn
                                                                     System.err.println(e + "You entity choice is not valid." );
                                                                     break;
                                                                 }
 
-                                                            case 2:
+                                                            case 2: //an thelei an tropoihsei mai posothta
 
                                                                 System.out.println("Give quantity");
                                                                 if (sc.hasNextDouble()) {
 
                                                                     double quantity;
-                                                                    quantity = Math.abs(sc.nextDouble());
+                                                                    quantity = Math.abs(sc.nextDouble()); //dinei to poso se apolyth timh
                                                                     sc.nextLine();
                                                                     try {
 
-
+                                                                        //thetei thn posothta ths prosforas toy me aythn p epelekse
                                                                         don.getOfferList().getRdEntities().get(choice - 1).setQuantity(quantity);
                                                                         System.out.println("Quantity was changed to given one.");
                                                                         break;
-                                                                    } catch (IndexOutOfBoundsException e) {
+                                                                    } catch (IndexOutOfBoundsException e) { //omoios an exei dwsei entity ektos oriwn
                                                                         System.err.println(e + "\n" + "Choice of entity is not available");
                                                                         break;
                                                                     }
                                                                 } else
-                                                                    sc.nextLine();
+                                                                    sc.nextLine(); //nextLine aparaithta opoy xrhsimopoieitai scanner
 
 
                                                                 break;
@@ -795,23 +794,23 @@ public class Menu {
                                                 break;
                                             }
                                             break;
-                                        case 'b':
+                                        case 'b': //an thelei na diagrapsei th lista toy kaloyme thn katallhlh methodo
                                             System.out.println("Deleting all offers...");
                                             don.getOfferList().reset();
                                             System.out.println("Success.");
                                             break;
 
 
-                                        case 'c':
+                                        case 'c': //aplo commit me xeirismo sthn Offers.
 
                                             don.commit();
                                             System.out.println("Commit successful.");
                                             break;
 
 
-                                        case '4':
+                                        case '4': //back
                                             break outerw;
-                                        default:
+                                        default://an dwsei mh epithimity epilogh pou prospernaei tis prohgoumenes sinthikes
                                             break;
 
 
@@ -828,21 +827,21 @@ public class Menu {
                         break;
 
 
-                    case 3:
+                    case 3: //commit opws kai pio panw
                         don.commit();
                         System.out.println("Commit succesful");
                         break;
-                    case 4:
+                    case 4: //to back poy dn kanei exei ousia edw
                         break;
 
                     case 5:
                         System.out.println("Logging off...");
-                        return;
+                        return; //epistrefei tpt afou einai void alla etsi termatizei thn methodo kai synexizoyme kanonika sthn check
 
                     case 6:
                         System.out.println("Exitting...");
                         sc.close();
-                        System.exit(0);
+                        System.exit(0); //kleinoyme to scanner kai termatizoyme to programma
 
                 }
 
