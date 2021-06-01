@@ -48,11 +48,11 @@ public class Organization {
             if (entityList.contains(entity)) // to contains einai boolean
             {
                 System.out.println("Error");
-                throw new RuntimeException("This entity already exists");
+                throw new EntityAlreadyExistingException("This entity already exists");
 
             }
             entityList.add(entity);
-        }catch (RuntimeException e) {
+        }catch (EntityAlreadyExistingException e) {
             System.err.println(e);
         }
     }
@@ -76,11 +76,11 @@ public class Organization {
             if (donatorList.contains(donator)) //H methodos contains se ena arraylist einai boolean
             {
                 System.out.println("Error");
-                throw new RuntimeException("This donator already exists");
+                throw new UserAlreadyExistsException("This donator already exists");
 
             }
             donatorList.add(donator);
-        }catch (RuntimeException e){
+        }catch (UserAlreadyExistsException e){
             System.err.println(e);
         }
     }
@@ -103,11 +103,11 @@ public class Organization {
             if (beneficiaryList.contains(beneficiary))
             {
                 System.out.println("Error");
-                throw new RuntimeException("This beneficiary already exists");
+                throw new UserAlreadyExistsException("This beneficiary already exists");
 
             }
             beneficiaryList.add(beneficiary);
-        }catch (RuntimeException e){
+        }catch (UserAlreadyExistsException e){
             System.err.println(e);
         }
 

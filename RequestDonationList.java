@@ -18,9 +18,9 @@ public class RequestDonationList {
                     return rdEntity; //an yparxei entity me to id poy dwsame san orisma to epistrefei
                 }
             }
-            throw new RuntimeException("Entity with that ID doesnt exist"); //petaei exception oti dn yparxei
+            throw new EntityNotExistingException("Entity with that ID doesnt exist"); //petaei exception oti dn yparxei
 
-        }catch(RuntimeException e){
+        }catch(EntityNotExistingException e){
             System.err.println(e);
             return null; //kanoyme return null an exei petaksei exception epeidh to xrhsimopoioyme gia ena elegxo sthn Request
         }
@@ -46,14 +46,14 @@ public class RequestDonationList {
                         if (rd.getID() == Organization.getEntityList().get(j).getId() ) {
                            // System.out.println("vrikame to "+);
                             break;
-                        } else if(j==Organization.getEntityList().size()-1) throw new RuntimeException("Entity doesnt exist in the Organization"); //ekfwnhsh???
+                        } else if(j==Organization.getEntityList().size()-1) throw new EntityNotExistingException("Entity doesnt exist in the Organization"); //ekfwnhsh???
                     } //An to vrike se olh thn for sto teleytaio treksimo ths for petaei Exception
                 }
                 rdEntities.add(rd); //alliws kanei add kanonika
             }
 
 
-        }catch (RuntimeException e){
+        }catch (EntityNotExistingException e){
             System.err.println(e);
         }
     }
@@ -82,8 +82,8 @@ public class RequestDonationList {
                     break;
                 }
             }
-            if (!found) throw new RuntimeException("Entity with that same ID doesnt exist"); //an dn yparxei petaei exception
-        }catch (RuntimeException e){
+            if (!found) throw new EntityNotExistingException("Entity with that same ID doesnt exist"); //an dn yparxei petaei exception
+        }catch (EntityNotExistingException e){
             System.err.println(e);
         }
 

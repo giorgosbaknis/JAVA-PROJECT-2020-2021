@@ -29,7 +29,7 @@ public class Menu {
                     while (true) { //an aplws o xrhsths pathsei enter synexizei na zhtaei thlefwno
                         boolean trexw = true;
 
-                        for (int i = 0; i < currPhone.length(); i++) {
+                        for (int i = 0; i < currPhone.length(); i++) { //tsekarei an exei dwsei arithmous
                             if (currPhone.charAt(i) > '9' || currPhone.charAt(i) < '0') {
                                 trexw=false;
                                 break;
@@ -37,14 +37,14 @@ public class Menu {
                                break;
                             }
                         }
-                        if (currPhone.length() != 10 && trexw) {
+                        if (currPhone.length() != 10 && trexw) { //an exei dwsei mono arithmous tsekarei an edwse 10 opws exei ena thlefwno
                             System.out.println("Put phone number with 10 digits!!!");
                             trexw=false;
                         }
-                        else if(trexw)
+                        else if(trexw) //an perasei tous elegxous synexzei
                             break checking;
 
-                        if(!trexw) {
+                        if(!trexw) { //alliws zhtaei apo ton xrhsth na dwsei ena egkyro thlefwno
                             System.out.println("Give a valid phone number: ");
 
                             currUserPhone = currPhone = sc.nextLine().strip();
@@ -285,7 +285,7 @@ public class Menu {
 
                                                         break;
                                                     }
-                                                } catch (IndexOutOfBoundsException e) { //an dwsei asxeto aithmo entity
+                                                } catch (EntityOutOfBoundsException e) { //an dwsei asxeto aithmo entity
                                                     System.err.println(e + "Material with that Number does not exist.");
                                                 }
                                             } else
@@ -383,7 +383,7 @@ public class Menu {
 
                                                         break;
 
-                                                    } catch (ArrayIndexOutOfBoundsException e) {
+                                                    } catch (EntityOutOfBoundsException e) {
                                                         System.err.println(e);
                                                     }
                                                 } else
@@ -564,15 +564,10 @@ public class Menu {
                                                                     RequestDonation temp2 = new RequestDonation(materials.get(antikd1 - 1), amount);
 
                                                                     temp2.setQuantity(amount);//allagh ths posothtas toy antikeimenou
-                                                                    //se periptwsh pou dhmiourghthei exceprion sto add tou antikeimenou
-                                                                    try {
 
-                                                                        don.add(temp2);
-                                                                        System.out.println("Donation was succesful");
-                                                                        break while2;
-                                                                    } catch (NullPointerException e) {
-                                                                        System.err.println(e);
-                                                                    }
+                                                                    don.add(temp2);
+                                                                    System.out.println("Donation was succesful");
+                                                                    break while2;
 
 
                                                                 } else
@@ -593,7 +588,7 @@ public class Menu {
 
                                                     break;
                                                 }
-                                            } catch (ArrayIndexOutOfBoundsException e) {
+                                            } catch (EntityOutOfBoundsException e) {
                                                 System.err.println(e + "Material with that Number does not exist.");
                                             }
                                         } else
@@ -690,7 +685,7 @@ public class Menu {
 
                                                         break;
 
-                                                    } catch (ArrayIndexOutOfBoundsException e) {
+                                                    } catch (EntityOutOfBoundsException e) {
                                                         System.err.println(e);
                                                     }
                                                 } else
@@ -763,7 +758,7 @@ public class Menu {
                                                                 //afairoyme apo thn lista poy periexei h offerlist ena stoixeio ayths ths listas
 
 
-                                                                } catch (IndexOutOfBoundsException e) { //an dwsei entity ektos oriwn
+                                                                } catch (EntityOutOfBoundsException e) { //an dwsei entity ektos oriwn
                                                                     System.err.println(e + "You entity choice is not valid." );
                                                                     break;
                                                                 }
@@ -782,7 +777,7 @@ public class Menu {
                                                                         don.getOfferList().getRdEntities().get(choice - 1).setQuantity(quantity);
                                                                         System.out.println("Quantity was changed to given one.");
                                                                         break;
-                                                                    } catch (IndexOutOfBoundsException e) { //omoios an exei dwsei entity ektos oriwn
+                                                                    } catch (EntityOutOfBoundsException e) { //omoios an exei dwsei entity ektos oriwn
                                                                         System.err.println(e + "\n" + "Choice of entity is not available");
                                                                         break;
                                                                     }
@@ -938,7 +933,7 @@ public class Menu {
                                             try {
                                                 System.out.println(materials.get(antik - 1).toString() ) ;//typwnoyme oles tis leptomeries toy
                                                 break;
-                                            }catch (ArrayIndexOutOfBoundsException e){
+                                            }catch (EntityOutOfBoundsException e){
                                                 System.err.println(e);
                                             }
                                         }else
@@ -983,7 +978,7 @@ public class Menu {
                                             try {
                                                 System.out.println( services.get(antik - 1).toString() );//typwnoyme oles tis leptomeries toy
                                                 break;
-                                            }catch (IndexOutOfBoundsException e){
+                                            }catch (EntityOutOfBoundsException e){
                                                 System.err.println(e);
                                             }
                                         }else
@@ -1037,7 +1032,7 @@ public class Menu {
                                                     Organization.getBeneficiaryList().get(inp - 1).getRecievedList().monitor();
                                                     break;
 
-                                                } catch (IndexOutOfBoundsException e) {
+                                                } catch (EntityOutOfBoundsException e) {
                                                     System.out.println(e);
                                                 }
 
@@ -1122,7 +1117,7 @@ public class Menu {
                                                                 }
 
                                                             }
-                                                        } catch (IndexOutOfBoundsException e) {//an den exei epilsksei egkyro arithmo donator
+                                                        } catch (EntityOutOfBoundsException e) {//an den exei epilsksei egkyro arithmo donator
                                                             System.out.println(e);
                                                         }
 
