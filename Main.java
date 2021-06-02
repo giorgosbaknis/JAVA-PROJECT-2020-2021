@@ -25,10 +25,7 @@ public class Main {
         org.addEntity(BabySitting);
         org.addEntity(rice);
         org.addEntity(sugar);
-
-
-
-
+        
         Organization.insertBeneficiary(beneficiary1);
         Organization.insertBeneficiary(beneficiary2);
         Organization.insertDonator(donator);
