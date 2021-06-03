@@ -813,7 +813,6 @@ public class Menu {
                                         case 'c': //aplo commit me xeirismo sthn Offers.
 
                                             don.commit();
-                                            System.out.println("Commit successful.");
                                             break;
 
 
@@ -838,7 +837,6 @@ public class Menu {
 
                     case 3: //commit opws kai pio panw
                         don.commit();
-                        System.out.println("Commit succesful");
                         break;
                     case 4: //to back poy dn kanei exei ousia edw
                         break;

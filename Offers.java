@@ -10,6 +10,8 @@ public class Offers extends RequestDonationList {
                 System.out.println("Donation committed Successfully of "+currDon.getEntity().getName());
             }
                 getRdEntities().clear(); //To afairei apo thn lista toy Donator
+                System.out.println("Commit Successful.");
         }
+        else System.out.println("You have no offers at this moment.");
     }
 }
