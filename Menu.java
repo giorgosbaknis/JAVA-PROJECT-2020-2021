@@ -96,6 +96,7 @@ public class Menu {
 
                                             while (true) {
                                                 System.out.println("How many members do you have in your family? ");
+                                                System.out.println("Input is in absolute value.");
                                                 if (sc.hasNextInt()) {
                                                     int choi = Math.abs(sc.nextInt());
                                                     choi = Math.abs(choi); //pernei apolyth timh gia to posa atoma exei
@@ -241,6 +242,7 @@ public class Menu {
                                                             switch (ok.charAt(0)) {
                                                                 case 'y': //an thelei na kanei request
                                                                     System.out.println("What amount do you want to get?");
+                                                                    System.out.println("Input is in absolute value.");
                                                                     double amount;
                                                                    boolean yparxei = false; // me ayta eksetazoume an prosferetai ayto p zhtaei
                                                                     if (sc.hasNextDouble()) { //zhtame posothta
@@ -347,6 +349,7 @@ public class Menu {
                                                                 switch (ok.charAt(0)) {
                                                                     case 'y':
                                                                         System.out.println("How many hours do you want to request?");
+                                                                        System.out.println("Input is in absolute value.");
                                                                         double hours; //wres yphresias anti gia pososthta
                                                                         boolean yparxei = false;
                                                                         if (sc.hasNextDouble()) {
@@ -549,6 +552,7 @@ public class Menu {
                                                         switch (ok.charAt(0)) {
                                                             case 'y':
                                                                 System.out.println("What amount do you want to offer?");//posotita pou thelei na dwsei o xrhsths
+                                                                System.out.println("Input is in absolute value.");
                                                                 double amount;
                                                                 //eisagwgh posothtas
                                                                 if (sc.hasNextDouble()) {
@@ -655,6 +659,7 @@ public class Menu {
                                                                 switch (ok.charAt(0)) { //diavazei ton character sthn thesi 0 afou h java diavazei string
                                                                     case 'y':
                                                                         System.out.println("How many hours do you want to offer?");
+                                                                        System.out.println("Input is in absolute value.");
                                                                         double hours; //poses wres thelei an prosferei
                                                                         if (sc.hasNextDouble()) {
                                                                             hours = Math.abs(sc.nextDouble());//se apolyth timh
@@ -777,6 +782,7 @@ public class Menu {
                                                             case 2: //an thelei an tropoihsei mai posothta
 
                                                                 System.out.println("Give quantity");
+                                                                System.out.println("Input is in absolute value.");
                                                                 if (sc.hasNextDouble()) {
 
                                                                     double quantity;
