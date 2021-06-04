@@ -189,35 +189,38 @@ public class Menu {
                                 switch (epild1) {
                                     case 1: //an epileksei material
 
-                                        ArrayList<Entity> materials = new ArrayList<>();
-                                        boolean keno = false;
-                                        for (int i = 0; i < Organization.getEntityList().size(); i++) { //diaperash ta entities toy organismoy
-                                            keno = false;
-                                            if (Organization.getEntityList().get(i) instanceof Material) { //an vrei to antikeimeno san material
-                                                materials.add(Organization.getEntityList().get(i)); //to prosthetei se mia arraylist
-                                                System.out.print(materials.size() + "." + Organization.getEntityList().get(i).getName());
-                                                //to material.size dhlwnei th thesi toy antikeimenoy poy typwnoume
-                                                //kai sthn epomenh typwnoyme to onoma toy material mas
 
-                                                if (Organization.getCurrentDonations().getRdEntities().size() != 0) // dn eixame kanei elegxo an einai kenh
-                                                    for (RequestDonation currDon : Organization.getCurrentDonations().getRdEntities()) {
-
-                                                        if (currDon.getID() == Organization.getEntityList().get(i).getId()) { //an vrei to antikeimeno oti prosforetai posothta
-                                                            System.out.println(" (" + currDon.getQuantity() + ')'); //thn typwnei apo dipla
-                                                            keno=true;
-                                                        }
-                                                    }
-                                                if(!keno)
-                                                    System.out.println(); //morfopoihsh twn prints
-
-
-                                            }
-                                        }
 
 
                                         while2:
                                         while (true) {
+                                            ArrayList<Entity> materials = new ArrayList<>();
+                                            boolean keno = false;
+                                            for (int i = 0; i < Organization.getEntityList().size(); i++) { //diaperash ta entities toy organismoy
+                                                keno = false;
+                                                if (Organization.getEntityList().get(i) instanceof Material) { //an vrei to antikeimeno san material
+                                                    materials.add(Organization.getEntityList().get(i)); //to prosthetei se mia arraylist
+                                                    System.out.print(materials.size() + "." + Organization.getEntityList().get(i).getName());
+                                                    //to material.size dhlwnei th thesi toy antikeimenoy poy typwnoume
+                                                    //kai sthn epomenh typwnoyme to onoma toy material mas
+
+                                                    if (Organization.getCurrentDonations().getRdEntities().size() != 0) // dn eixame kanei elegxo an einai kenh
+                                                        for (RequestDonation currDon : Organization.getCurrentDonations().getRdEntities()) {
+
+                                                            if (currDon.getID() == Organization.getEntityList().get(i).getId()) { //an vrei to antikeimeno oti prosforetai posothta
+                                                                System.out.println(" (" + currDon.getQuantity() + ')'); //thn typwnei apo dipla
+                                                                keno=true;
+                                                            }
+                                                        }
+                                                    if(!keno)
+                                                        System.out.println(); //morfopoihsh twn prints
+
+
+                                                }
+                                            }
+
                                             int antikd1;
+
                                             System.out.println("Type the number of your desired Material.");
                                             if (sc.hasNextInt()) { //zhtame apto xrhsth poio entity thelei
                                                 antikd1 = sc.nextInt();
@@ -294,33 +297,38 @@ public class Menu {
                                         break;
 
                                     case 2:
-                                        ArrayList<Entity> services = new ArrayList<>();
 
-                                        for (int i = 0; i < Organization.getEntityList().size(); i++) { //omoiws me thn material
-                                            keno = false;
-                                            if (Organization.getEntityList().get(i) instanceof Service) {
-                                                services.add(Organization.getEntityList().get(i)); //apothikevoume ta services se arraylist
-                                                // System.out.println();
-                                                System.out.print(services.size() + "." + Organization.getEntityList().get(i).getName());
-                                                //to megethos toy arraylist dhlwnei kai th thesi toy antikemenou poy kanoume print
-                                                if (Organization.getCurrentDonations().getRdEntities().size() != 0) // an dn einai kenh
-                                                    for (RequestDonation currDon : Organization.getCurrentDonations().getRdEntities()) {
-
-                                                        if (currDon.getID() == Organization.getEntityList().get(i).getId()) {
-                                                            System.out.println(" (" + currDon.getQuantity() + ')');
-                                                            keno=true;
-                                                        }
-                                                    }
-                                                if(!keno)
-                                                    System.out.println();
-
-                                            }
-                                        }
 
 
                                         while3:
                                         while (true) {
+
+                                            ArrayList<Entity> services = new ArrayList<>();
+
+                                            for (int i = 0; i < Organization.getEntityList().size(); i++) { //omoiws me thn material
+                                                boolean keno = false;
+                                                if (Organization.getEntityList().get(i) instanceof Service) {
+                                                    services.add(Organization.getEntityList().get(i)); //apothikevoume ta services se arraylist
+                                                    // System.out.println();
+                                                    System.out.print(services.size() + "." + Organization.getEntityList().get(i).getName());
+                                                    //to megethos toy arraylist dhlwnei kai th thesi toy antikemenou poy kanoume print
+                                                    if (Organization.getCurrentDonations().getRdEntities().size() != 0) // an dn einai kenh
+                                                        for (RequestDonation currDon : Organization.getCurrentDonations().getRdEntities()) {
+
+                                                            if (currDon.getID() == Organization.getEntityList().get(i).getId()) {
+                                                                System.out.println(" (" + currDon.getQuantity() + ')');
+                                                                keno=true;
+                                                            }
+                                                        }
+                                                    if(!keno)
+                                                        System.out.println();
+
+                                                }
+                                            }
+
+
                                             int antik;
+
                                             while4:
                                             while (true) {
                                                 System.out.println("Type the number of your desired Service");
@@ -489,35 +497,35 @@ public class Menu {
                                 //perisptwsh epiloghs tou Material
                                 case 1:
 
-                                    ArrayList<Entity> materials = new ArrayList<>();
-                                    boolean keno = false;
-                                    for (int i = 0; i < Organization.getEntityList().size(); i++) {
-                                        keno=false;
-                                        //eleghos an to entity einai material h oxi
-                                        if (Organization.getEntityList().get(i) instanceof Material) {
-                                            materials.add(Organization.getEntityList().get(i));//prosthetei to entity sthn materials
-                                            System.out.print(materials.size() + "." + Organization.getEntityList().get(i).getName());
-
-                                            //an o arithmos twn entities pou mporoun na dvrhthoun einai != 0
-                                            if (Organization.getCurrentDonations().getRdEntities().size() != 0)
-                                                //gia kathe entity
-                                                for (RequestDonation currDon : Organization.getCurrentDonations().getRdEntities()) {
-                                                    //an to entity pou diakinei o organismos exei prosfores ekeinh thn stigmh
-                                                    if (currDon.getID() == Organization.getEntityList().get(i).getId()) {
-                                                        System.out.println(" (" + currDon.getQuantity() + ')');
-                                                        keno = true;
-                                                    }
-                                                }
-                                            //morfopoihsh
-                                            if(!keno)
-                                                System.out.println();
-
-                                        }
-                                    }
-
-
                                     while2:
                                     while (true) {
+
+                                        ArrayList<Entity> materials = new ArrayList<>();
+                                        boolean keno = false;
+                                        for (int i = 0; i < Organization.getEntityList().size(); i++) {
+                                            keno=false;
+                                            //eleghos an to entity einai material h oxi
+                                            if (Organization.getEntityList().get(i) instanceof Material) {
+                                                materials.add(Organization.getEntityList().get(i));//prosthetei to entity sthn materials
+                                                System.out.print(materials.size() + "." + Organization.getEntityList().get(i).getName());
+
+                                                //an o arithmos twn entities pou mporoun na dvrhthoun einai != 0
+                                                if (Organization.getCurrentDonations().getRdEntities().size() != 0)
+                                                    //gia kathe entity
+                                                    for (RequestDonation currDon : Organization.getCurrentDonations().getRdEntities()) {
+                                                        //an to entity pou diakinei o organismos exei prosfores ekeinh thn stigmh
+                                                        if (currDon.getID() == Organization.getEntityList().get(i).getId()) {
+                                                            System.out.println(" (" + currDon.getQuantity() + ')');
+                                                            keno = true;
+                                                        }
+                                                    }
+                                                //morfopoihsh
+                                                if(!keno)
+                                                    System.out.println();
+
+                                            }
+                                        }
+
                                         int antikd1;
                                         //epilogi katallhlou material poy thelei o xrhsths
                                         System.out.println("Type the number of your desired Material.");
@@ -597,34 +605,37 @@ public class Menu {
                                     break;
 
                                 case 2:
-                                    ArrayList<Entity> services = new ArrayList<>();//dhmiourgia neas listas
-                                    //
-                                    for (int i = 0; i < Organization.getEntityList().size(); i++) {
-                                        keno = false;
-                                        //an to entity einai service
-                                        if (Organization.getEntityList().get(i) instanceof Service) {
-                                            //ta entities typou services entasontai sthn lista services
-                                            services.add(Organization.getEntityList().get(i));
-                                            //ektypwsh tou size you arraylist kai tou onomatos
-                                            System.out.print(services.size() + "." + Organization.getEntityList().get(i).getName());
-                                            //an o arithmos twn entities pou exoun prosferthei einai != 0
-                                            if (Organization.getCurrentDonations().getRdEntities().size() != 0)
-                                                for (RequestDonation currDon : Organization.getCurrentDonations().getRdEntities()) {
 
-                                                    if (currDon.getID() == Organization.getEntityList().get(i).getId()) {
-                                                        //ektypwsh tou quantity
-                                                        System.out.println(" (" + currDon.getQuantity() + ')');
-                                                        keno = true;
-                                                    }
-                                                }
-
-                                            if(!keno)
-                                                System.out.println();
-                                        }
-                                    }
 
                                         while3:
                                         while (true) {
+
+                                            ArrayList<Entity> services = new ArrayList<>();//dhmiourgia neas listas
+                                            //
+                                            for (int i = 0; i < Organization.getEntityList().size(); i++) {
+                                                boolean keno = false;
+                                                //an to entity einai service
+                                                if (Organization.getEntityList().get(i) instanceof Service) {
+                                                    //ta entities typou services entasontai sthn lista services
+                                                    services.add(Organization.getEntityList().get(i));
+                                                    //ektypwsh tou size you arraylist kai tou onomatos
+                                                    System.out.print(services.size() + "." + Organization.getEntityList().get(i).getName());
+                                                    //an o arithmos twn entities pou exoun prosferthei einai != 0
+                                                    if (Organization.getCurrentDonations().getRdEntities().size() != 0)
+                                                        for (RequestDonation currDon : Organization.getCurrentDonations().getRdEntities()) {
+
+                                                            if (currDon.getID() == Organization.getEntityList().get(i).getId()) {
+                                                                //ektypwsh tou quantity
+                                                                System.out.println(" (" + currDon.getQuantity() + ')');
+                                                                keno = true;
+                                                            }
+                                                        }
+
+                                                    if(!keno)
+                                                        System.out.println();
+                                                }
+                                            }
+
                                             int antik;
                                             while4:
                                             while (true) {
@@ -1017,10 +1028,13 @@ public class Menu {
 
                             switch (epil2) {
                                 case 'a'://an thelei na tou emfanisei tous beneficiaries
-                                    Organization.listBeneficiaries();
+
                                     int inp=0;
                                     boolean notNull = false;
                                     while (true) {
+
+                                        Organization.listBeneficiaries();
+
                                         if (Organization.getBeneficiaryList().size() != 0) {
                                             System.out.println("Type the number of the Beneficiary you want.");
                                             if (sc.hasNextInt()) {
