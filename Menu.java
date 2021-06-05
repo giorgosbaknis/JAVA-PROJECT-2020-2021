@@ -145,7 +145,7 @@ public class Menu {
 
 
     public void printMenuBene(Beneficiary be){
-        System.out.println("Hello "+be.getName() +'\n'+"Your phone is :"+be.getPhone()); //ONOMA ORGANAT?????
+        System.out.println("\nHello "+be.getName() +'\n'+"Your phone is :"+be.getPhone()); //ONOMA ORGANAT?????
         Scanner sc = new Scanner(System.in);
 
         outerb:
@@ -229,7 +229,7 @@ public class Menu {
                                                 try {
                                                     while2_1:
                                                     while (true) {
-                                                        System.out.println(materials.get(antikd1 - 1).toString()); //typwnoyme oles tis leptomeries toy
+                                                        System.out.println(materials.get(antikd1 - 1).toString()+"\n"); //typwnoyme oles tis leptomeries toy
                                                         System.out.println("Do you want to Request this item? Press y or n for yes or no.");
                                                         System.out.println("Press 4 to go back");
 
@@ -338,7 +338,7 @@ public class Menu {
                                                     antik = sc.nextInt();
                                                     sc.nextLine();
                                                     try {
-                                                        System.out.println(services.get(antik - 1).toString());
+                                                        System.out.println(services.get(antik - 1).toString()+"\n");
                                                         System.out.println("Do you want to Request this service? Press y or n for yes or no."); //omoiws me material
                                                         System.out.println("Press 4 to go back");
                                                         {
@@ -422,7 +422,7 @@ public class Menu {
                         if (be.getRequestsList().getRdEntities().size() != 0) //an den einai adeia
                             be.showRequests(); //deixnei mono ta Request
                         else
-                            System.out.println("There are not any requests at this time.");
+                            System.out.println("\nThere are not any requests at this time.");
                         break;
 
                     case 3:
@@ -433,10 +433,10 @@ public class Menu {
                         break;
 
                     case 5:
-                        System.out.println("Logging off..."); //den epistrefei tipota alla termatizei thn methodo kai synexizei kanonika h CHECK
+                        System.out.println("\nLogging off..."); //den epistrefei tipota alla termatizei thn methodo kai synexizei kanonika h CHECK
                         return;
                     case 6:
-                        System.out.println("Exitting...");
+                        System.out.println("\nExitting...");
                         sc.close(); //Kleinoyme to scanner
                         System.exit(0); //kai termatizei teleiws to programma
 
@@ -448,7 +448,7 @@ public class Menu {
 
     }
     public void printMenuDon(Donator don) {
-        System.out.println("Hello " + don.getName() + '\n' + "Your phone is :" + don.getPhone()); //ektypwsh plhroforiwn tou donator
+        System.out.println("\nHello " + don.getName() + '\n' + "Your phone is :" + don.getPhone()); //ektypwsh plhroforiwn tou donator
         Scanner sc = new Scanner(System.in);
 
         outerd:
@@ -538,7 +538,7 @@ public class Menu {
                                             try {
                                                 while2_1:
                                                 while (true) {
-                                                    System.out.println(materials.get(antikd1 - 1).toString());//ektypwsh plhrofoiwn tou material.
+                                                    System.out.println(materials.get(antikd1 - 1).toString()+"\n");//ektypwsh plhrofoiwn tou material.
                                                     //epilogh gia to an thelei o xrhsthe na prosferei to antikeimeno h oxi
                                                     System.out.println("Do you want to offer this item? Press y or n for yes or no.");
                                                     System.out.println("Press 4 to go back");
@@ -648,7 +648,7 @@ public class Menu {
                                                     antik = sc.nextInt(); //dinoyme sto xrhsth na epileksei service
                                                     sc.nextLine();
                                                     try {
-                                                        System.out.println(services.get(antik - 1).toString()); //print details apto service p dialekse
+                                                        System.out.println(services.get(antik - 1).toString()+"\n"); //print details apto service p dialekse
                                                         System.out.println("Do you want to offer this service? Press y or n for yes or no.");
                                                         System.out.println("Press 4 to go back");
                                                         {
@@ -729,7 +729,8 @@ public class Menu {
                             while (true) {
                                 don.getOfferList().monitor(); //typwnei tis prosfores toy
 
-                                System.out.println("a.Modify you Offer list");
+
+                                System.out.println("\n"+"a.Modify you Offer list");
                                 System.out.println("b.Reset Your Offer List");
                                 System.out.println("c.Commit");
                                 System.out.println("Press 4 to go back.");
@@ -753,7 +754,7 @@ public class Menu {
                                                     sc.nextLine();
 
 
-                                                    System.out.println("What do you want to do?");
+                                                    System.out.println("\n"+"What do you want to do?");
                                                     System.out.println("1.Delete Offer");
                                                     System.out.println("2.Change an offer's quantity.");
                                                     System.out.println("Press 4 to go back");
@@ -781,7 +782,7 @@ public class Menu {
 
                                                             case 2: //an thelei an tropoihsei mai posothta
 
-                                                                System.out.println("Give quantity");
+                                                                System.out.println("\n"+"Give quantity");
                                                                 System.out.println("Input is in absolute value.");
                                                                 if (sc.hasNextDouble()) {
 
@@ -821,7 +822,7 @@ public class Menu {
                                             }
                                             break;
                                         case 'b': //an thelei na diagrapsei th lista toy kaloyme thn katallhlh methodo
-                                            System.out.println("Deleting all offers...");
+                                            System.out.println("\n"+"Deleting all offers...");
                                             don.getOfferList().reset();
                                             System.out.println("Success.");
                                             break;
@@ -859,11 +860,11 @@ public class Menu {
                         break;
 
                     case 5:
-                        System.out.println("Logging off...");
+                        System.out.println("\n"+"Logging off...");
                         return; //epistrefei tpt afou einai void alla etsi termatizei thn methodo kai synexizoyme kanonika sthn check
 
                     case 6:
-                        System.out.println("Exitting...");
+                        System.out.println("\n"+"Exitting...");
                         sc.close();
                         System.exit(0); //kleinoyme to scanner kai termatizoyme to programma
 
@@ -875,7 +876,7 @@ public class Menu {
     }
 
     public void printMenuAdmin(Admin ad){
-        System.out.println("Welcome "+ad.getName()+ " Your Phone is: "+ad.getPhone());//emfanizei to onoma tou admin kai to thlefwno tou
+        System.out.println("\nWelcome "+ad.getName()+ " Your Phone is: "+ad.getPhone());//emfanizei to onoma tou admin kai to thlefwno tou
 
         outer:
         while (true){
@@ -946,7 +947,7 @@ public class Menu {
                                             antik = sc.nextInt();
                                             sc.nextLine();//ta nextLine ypoxretwtika opoy xrhsimopoieitai scanner
                                             try {
-                                                System.out.println(materials.get(antik - 1).toString() ) ;//typwnoyme oles tis leptomeries toy
+                                                System.out.println(materials.get(antik - 1).toString()+"\n") ;//typwnoyme oles tis leptomeries toy
                                                 break;
                                             }catch (EntityOutOfBoundsException e){
                                                 System.err.println(e);
@@ -991,7 +992,7 @@ public class Menu {
                                             antik = sc.nextInt();
                                             sc.nextLine();//ta nextLine ypoxretwtika opoy xrhsimopoieitai scanner
                                             try {
-                                                System.out.println( services.get(antik - 1).toString() );//typwnoyme oles tis leptomeries toy
+                                                System.out.println( services.get(antik - 1).toString()+"\n");//typwnoyme oles tis leptomeries toy
                                                 break;
                                             }catch (EntityOutOfBoundsException e){
                                                 System.err.println(e);
@@ -1021,7 +1022,7 @@ public class Menu {
                     inner2:
                     while (true) {
                         char epil2;
-                        System.out.println("a. List Beneficiaries");
+                        System.out.println("\n"+"a. List Beneficiaries");
                         System.out.println("b. List Donators");
                         System.out.println("c. Reset Beneficiaries Lists");
                         System.out.println("Press 3 to go back.");
@@ -1070,9 +1071,11 @@ public class Menu {
                                     int inp2;
                                     inner3:
                                     while (true) {
+                                        System.out.println("--------------------");
                                         System.out.println("1.Clear Recieved List");
                                         System.out.println("2.Delete Beneficiary");
-                                        System.out.println("Press 3 to go back.");
+                                        System.out.println("Press 3 to go back.\n");
+
 
                                         System.out.println("Give one of the 3 numbers: ");
                                         if (sc.hasNextInt()) {

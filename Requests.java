@@ -7,7 +7,7 @@ public class Requests extends RequestDonationList{
 
 
     @Override
-    public void add(RequestDonation rd) {
+    public void add(RequestDonation rd)  {
         int rdID = rd.getID();
         double rdQu = rd.getQuantity();
         boolean allow=false;
@@ -110,7 +110,7 @@ public class Requests extends RequestDonationList{
                        if(rdID == rdEntity.getID()){ //tsekarei an einai to idio antikeimeno
                            insidecheck = true;
                            recievedinsidecheck=true;
-                           check2 = (Quant + rdEntity.getQuantity()) <= Level1Q; //Tsekarei an h posothta poy zhthse syn ayth poy exei hdh zhthsei einai egkyrh
+                           check2 = (Quant) <= Level1Q; //Tsekarei an h posothta poy zhthse  einai egkyrh
                            for(RequestDonation RecievedEntity : be.getRecievedList().getRdEntities() ) //kanei diaperash ta Entities
                                if(rdID == RecievedEntity.getID()){ //tsekarei an einai to idio antikeimeno
 
@@ -145,11 +145,11 @@ public class Requests extends RequestDonationList{
                if(check1) //an isxyei h prwth synthikh
                {
                    outerfor:
-                   for(RequestDonation rdEntity : getRdEntities() ) //kanei diaperash ta Entities
+                   for(RequestDonation rdEntity : getRdEntities() ) //kanei diaperash ta Entities ths RequestList toy Bene
                        if(rdID == rdEntity.getID()){ //tsekarei an einai to idio antikeimeno
                            insidecheck = true;
                            recievedinsidecheck=true;
-                           check2 = (Quant + rdEntity.getQuantity()) <= Level2Q; //Tsekarei an h posothta poy zhthse syn ayth poy exei hdh zhthsei einai egkyrh
+                           check2 = (Quant) <= Level2Q; //Tsekarei an h posothta poy zhthse  einai egkyrh
                            for(RequestDonation RecievedEntity : be.getRecievedList().getRdEntities() ) //kanei diaperash ta Entities
                                if(rdID == RecievedEntity.getID()){ //tsekarei an einai to idio antikeimeno
 
@@ -187,7 +187,7 @@ public class Requests extends RequestDonationList{
                        if(rdID == rdEntity.getID()){ //tsekarei an einai to idio antikeimeno
                            insidecheck = true;
                            recievedinsidecheck=true;
-                           check2 = (Quant + rdEntity.getQuantity()) <= Level3Q; //Tsekarei an h posothta poy zhthse syn ayth poy exei hdh zhthsei einai egkyrh
+                           check2 = (Quant) <= Level3Q; //Tsekarei an h posothta poy zhthse  einai egkyrh
                            for(RequestDonation RecievedEntity : be.getRecievedList().getRdEntities() ) //kanei diaperash ta Entities
                                if(rdID == RecievedEntity.getID()){ //tsekarei an einai to idio antikeimeno
 
@@ -213,7 +213,6 @@ public class Requests extends RequestDonationList{
                }
 
            }
-
            return check2 && check3; //epistrefei thn deyterh synthikh gia na kathorisei an isxioyn h proypotheseis h oxi
 
        }else return true; //an den einai material einai service opote panta petaei true apo EKFWNHSH
@@ -250,9 +249,11 @@ public class Requests extends RequestDonationList{
                                     if (validRequestDonation(getRdEntities().get(i - found), currBenef)) { //Tsekarei an einai valid to donation ksana
                                         currBen = currBenef; //afoy vrikame to beneficiary mas to vazoyme ston apo panw epeidh ayto einai temp metavlhth o currBenef
                                         break;
-                                    } else
+                                    } else {
+
                                         throw new UserNotAllowedEntityException("Beneficiary: " + currBenef.getName() + " is not allowed to have entity with:\n " + getRdEntities().get(i - found).getEntity().getEntityInfo());
-                                    //An den dikaioutai petaei exception
+
+                                    } //An den dikaioutai petaei exception
 
 
                                 }
@@ -261,6 +262,7 @@ public class Requests extends RequestDonationList{
 
                             // poy exei o Organismos thn posothta poy zhththike
                             System.out.println("Commit Succesful of " + getRdEntities().get(i - found).getEntity().getName());
+                            System.out.println("--------------------");
                             currBen.getRecievedList().add(getRdEntities().get(i - found)); //O Beneficiary paralambanei ayto poy zhthse sto RecievedList toy
                             currentDonation.setQuantity(currentDonation.getQuantity() - currQuantity); //afairei apo thn posothta toy antikeimenoy
                             getRdEntities().remove(getRdEntities().get(i - found)); //afairei apo ta Requests toy Beneficiary to antikemno
@@ -274,9 +276,11 @@ public class Requests extends RequestDonationList{
 
 
                 } catch (RuntimeException e){
+                    getRdEntities().remove(getRdEntities().get(i - found));
+                    found++;
                     System.err.println(e);
                 }
-           // System.out.println("trexw "+(i+1));
+
 
 
         }
