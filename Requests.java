@@ -276,7 +276,7 @@ public class Requests extends RequestDonationList{
 
 
                 } catch (RuntimeException e){
-                    getRdEntities().remove(getRdEntities().get(i - found));
+                    getRdEntities().remove(getRdEntities().get(i - found)); //an den ginei egkyro commit afairei to entity apo th request toy Bene
                     found++;
                     System.err.println(e);
                 }
