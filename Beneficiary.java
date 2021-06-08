@@ -2,6 +2,7 @@
 
 //klash epofeloumenou
 public class Beneficiary extends User{
+
     private int noPersorns = 1;//arithmos melwn oikogeneias
     private RequestDonationList recievedList = new RequestDonationList();//lista twn eidwn kai twn posothtwn poy exei lavei
     private Requests requestsList = new Requests();//lista twn eidwn kai twn posothtwn poy zhta na tou dwthoun

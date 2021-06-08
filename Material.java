@@ -1,5 +1,6 @@
 
 public class Material extends Entity{
+
     private double level1;
     private double level2;
     private double level3;
@@ -27,4 +28,5 @@ public class Material extends Entity{
     public double getLevel3() {
         return level3;
     }
+
 }

@@ -1,6 +1,7 @@
 
 
 public class Admin extends User{
+
     private boolean isAdmin = true;//anagnorizei oti einai admin
     //rythmizei to onoma kai to thlefwno tou admin
     public Admin(String name, String phone) {
@@ -10,4 +11,5 @@ public class Admin extends User{
     public boolean isAdmin() {
         return isAdmin;
     }
+
 }

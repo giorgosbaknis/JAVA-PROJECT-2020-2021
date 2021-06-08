@@ -27,12 +27,14 @@ public class RequestDonation implements Comparable<RequestDonation> { //Comparab
         return this.entity.getId();
     }
 
+
     @Override
     public  int compareTo(RequestDonation o1) {
 
         return this.entity.getId()-o1.entity.getId(); //Epistrefei 0 an ta dyo Entity exoyn to idio ID
 
     }
+
 
     @Override
     public String toString(){

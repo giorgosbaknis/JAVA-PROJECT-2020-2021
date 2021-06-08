@@ -1,5 +1,6 @@
 
 abstract public class Entity {
+
    private String name = "";
    private String description = "";
    private int id = 0;
@@ -27,4 +28,5 @@ abstract public class Entity {
     public int getId() {
         return id;
     }
+
 }

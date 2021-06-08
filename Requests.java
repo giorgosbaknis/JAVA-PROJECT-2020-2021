@@ -282,16 +282,13 @@ public class Requests extends RequestDonationList{
                 }
 
 
-
         }
             if (!exist) {
                 System.out.println("There are not any Requests to commit."); // an den vrethei kapoios beneficiary me tetoia Request teleiwnei h methodos
             }
 
 
-
         }
-
 
 
 }

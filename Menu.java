@@ -290,7 +290,7 @@ public class Menu {
 
                                                         break;
                                                     }
-                                                } catch (EntityOutOfBoundsException e) { //an dwsei asxeto aithmo entity
+                                                } catch (IndexOutOfBoundsException e) { //an dwsei asxeto aithmo entity
                                                     System.err.println(e + "Material with that Number does not exist.");
                                                 }
                                             } else
@@ -394,7 +394,7 @@ public class Menu {
 
                                                         break;
 
-                                                    } catch (EntityOutOfBoundsException e) {
+                                                    } catch (IndexOutOfBoundsException e) {
                                                         System.err.println(e);
                                                     }
                                                 } else
@@ -600,7 +600,7 @@ public class Menu {
 
                                                     break;
                                                 }
-                                            } catch (EntityOutOfBoundsException e) {
+                                            } catch (IndexOutOfBoundsException e) {
                                                 System.err.println(e + "Material with that Number does not exist.");
                                             }
                                         } else
@@ -701,7 +701,7 @@ public class Menu {
 
                                                         break;
 
-                                                    } catch (EntityOutOfBoundsException e) {
+                                                    } catch (IndexOutOfBoundsException e) {
                                                         System.err.println(e);
                                                     }
                                                 } else
@@ -775,7 +775,7 @@ public class Menu {
                                                                 //afairoyme apo thn lista poy periexei h offerlist ena stoixeio ayths ths listas
 
 
-                                                                } catch (EntityOutOfBoundsException e) { //an dwsei entity ektos oriwn
+                                                                } catch (IndexOutOfBoundsException e) { //an dwsei entity ektos oriwn
                                                                     System.err.println(e + "You entity choice is not valid." );
                                                                     break;
                                                                 }
@@ -795,7 +795,7 @@ public class Menu {
                                                                         don.getOfferList().getRdEntities().get(choice - 1).setQuantity(quantity);
                                                                         System.out.println("Quantity was changed to given one.");
                                                                         break;
-                                                                    } catch (EntityOutOfBoundsException e) { //omoios an exei dwsei entity ektos oriwn
+                                                                    } catch (IndexOutOfBoundsException e) { //omoios an exei dwsei entity ektos oriwn
                                                                         System.err.println(e + "\n" + "Choice of entity is not available");
                                                                         break;
                                                                     }
@@ -949,7 +949,7 @@ public class Menu {
                                             try {
                                                 System.out.println(materials.get(antik - 1).toString()+"\n") ;//typwnoyme oles tis leptomeries toy
                                                 break;
-                                            }catch (EntityOutOfBoundsException e){
+                                            }catch (IndexOutOfBoundsException e){
                                                 System.err.println(e);
                                             }
                                         }else
@@ -994,7 +994,7 @@ public class Menu {
                                             try {
                                                 System.out.println( services.get(antik - 1).toString()+"\n");//typwnoyme oles tis leptomeries toy
                                                 break;
-                                            }catch (EntityOutOfBoundsException e){
+                                            }catch (IndexOutOfBoundsException e){
                                                 System.err.println(e);
                                             }
                                         }else
@@ -1051,7 +1051,7 @@ public class Menu {
                                                     Organization.getBeneficiaryList().get(inp - 1).getRecievedList().monitor();
                                                     break;
 
-                                                } catch (EntityOutOfBoundsException e) {
+                                                } catch (IndexOutOfBoundsException e) {
                                                     System.out.println(e);
                                                 }
 
@@ -1138,7 +1138,7 @@ public class Menu {
                                                                 }
 
                                                             }
-                                                        } catch (EntityOutOfBoundsException e) {//an den exei epilsksei egkyro arithmo donator
+                                                        } catch (IndexOutOfBoundsException e) {//an den exei epilsksei egkyro arithmo donator
                                                             System.out.println(e);
                                                         }
 
@@ -1175,7 +1175,7 @@ public class Menu {
                         break outer; //break to outer kai teleiwnei h methodos
 
                     case 5:
-                        System.out.println("Exitting...");
+                        System.out.println("\nExitting...");
                         sc.close(); //kleinoume thn scanner kai termatizei to programma
                         System.exit(0);
 

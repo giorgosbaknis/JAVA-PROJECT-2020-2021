@@ -69,7 +69,9 @@ public class RequestDonationList {
         }
     }
 
+
     public void modify(RequestDonation rd) {
+
         int rdID = rd.getID();
         double rdQuan = rd.getQuantity();
         boolean found = false;
@@ -97,6 +99,7 @@ public class RequestDonationList {
     public void reset(){
         rdEntities.removeAll(rdEntities);
     } //afairei ola ta Entities apo thn zhtoumenh lista
+
 
 
 }

@@ -127,9 +127,7 @@ public class Organization {
     //stin kathgoria twn material h twn service kai epeita typwnei ta entities ana sygkekrimeni kathgoria
    public static void listEntities(){
 
-
         int cout=0;
-
 
         for(int i=0;i<entityList.size();i++){
             if (entityList.get(i) instanceof Service){

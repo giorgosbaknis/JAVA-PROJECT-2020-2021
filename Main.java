@@ -17,6 +17,7 @@ public class Main {
         Admin admin = new Admin("Baknis","5554351231");
         org.setAdmin(admin);
 
+
         Beneficiary beneficiary1 =new Beneficiary("Kostas","6975554123",2);
         Beneficiary beneficiary2 =new Beneficiary("Maria","6985554169",3);
         Donator donator = new Donator("Babis", "6976666661");

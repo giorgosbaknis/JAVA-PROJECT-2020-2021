@@ -2,6 +2,7 @@
 //klash pou anaparista ton dorhth
 public class Donator extends User{
 
+
     private Offers offerList = new Offers();//lista twn eidwn pou epithymei na prosferei o donator
 
     public Offers getOfferList() {
